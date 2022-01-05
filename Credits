@@ -1,0 +1,134 @@
+[center]
+TierLexikon von Lugraff unter MIT
+[url]https://spacebase1.wordpress.com/[/url]
+
+Erstellt mit Godot Engine 3.4 unter MIT
+[url]https://godotengine.org/[/url]
+
+Online-Database hostet by Silent Wolf unter Copyright SilentWolf 2019-2021. Alle rechte vorbehalten.
+[url]https://silentwolf.com/[/url]
+
+Hintergrundbild von Nick Roach unter GNU2.0 [url]https://commons.wikimedia.org/wiki/File:Elegant_Background-12.jpg[/url]
+
+Adler Logo Foto voncocoparisienne unter CC0 1.0
+[url]https://pixabay.com/photos/adler-bald-eagle-raptor-bird-head-2611528/[/url]
+
+Font Prida02Calt von Gluk unter OFL
+[url]https://www.fontspace.com/prida02calt-font-f22936[/url]
+
+Font Selawik von Microsoft unter OFL
+[url]https://www.fontspace.com/selawik-font-f56397[/url]
+
+Icons von Lorc unter CC BY 3.0
+[url]https://game-icons.net/[/url]
+
+GDNative wrapper von SQLite from 2shady4u unter MIT
+[url]https://github.com/2shady4u/godot-sqlite[/url]
+
+
+Diese App wird unter der folgenden Lizenz verfügbar gemacht:
+MIT Lizenz
+Copyright (c) 2007-2021 Lucas Rosswog
+
+Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die "Software") erhält, kostenlos die Erlaubnis erteilt, mit der Software ohne Einschränkung zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen , Kopien der Software zu veröffentlichen, zu verteilen, unterzulizenzieren und/oder zu verkaufen und Personen, denen die Software zur Verfügung gestellt wird, dies zu gestatten, vorbehaltlich der folgenden Bedingungen:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD "WIE BESEHEN" BEREITGESTELLT, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNGEN DER MARKTFÄHIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG VON VERLETZUNGEN. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, OB AUS VERTRAGLICHEM, SCHLECHTER ODER ANDERWEITIGEM, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN HANDELN IN DER SOFTWARE.
+
+Diese App verwendet die Godot Engine 3.4, die unter der folgenden Lizenz verfügbar ist:
+MIT Lizenz
+Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2021 Godot Engine-Mitwirkende.
+
+Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die "Software") erhält, kostenlos die Erlaubnis erteilt, mit der Software ohne Einschränkung zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen , Kopien der Software zu veröffentlichen, zu verteilen, unterzulizenzieren und/oder zu verkaufen und Personen, denen die Software zur Verfügung gestellt wird, dies zu gestatten, vorbehaltlich der folgenden Bedingungen:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD "WIE BESEHEN" BEREITGESTELLT, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNGEN DER MARKTFÄHIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG VON VERLETZUNGEN. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, OB AUS VERTRAGLICHEM, SCHLECHTER ODER ANDERWEITIGEM, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN HANDELN IN DER SOFTWARE.
+
+Diese App verwendet FreeType, die unter der folgenden Lizenz verfügbar ist:
+Teile dieser Software unterliegen dem Copyright © 1996 - 2020 The FreeType Project (www.freetype.org). Alle Rechte vorbehalten.
+
+Diese App verwendet ENet, die unter der folgenden Lizenz verfügbar ist:
+MIT Lizenz
+Copyright (c) 2002-2020 Lee Salzman
+
+Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die "Software") erhält, kostenlos die Erlaubnis erteilt, mit der Software ohne Einschränkung zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen , Kopien der Software zu veröffentlichen, zu verteilen, unterzulizenzieren und/oder zu verkaufen und Personen, denen die Software zur Verfügung gestellt wird, dies zu gestatten, vorbehaltlich der folgenden Bedingungen:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD "WIE BESEHEN" BEREITGESTELLT, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNGEN DER MARKTFÄHIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG VON VERLETZUNGEN. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, OB AUS VERTRAGLICHEM, SCHLECHTER ODER ANDERWEITIGEM, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN HANDELN IN DER SOFTWARE.
+
+Diese App verwendet MBedTLS, die unter der folgenden Lizenz verfügbar ist:
+Copyright Die Mbed TLS-Mitwirkenden
+
+Lizenziert unter der Apache-Lizenz, Version 2.0 (die „Lizenz“); Sie dürfen diese Datei nur in Übereinstimmung mit der Lizenz verwenden. Eine Kopie der Lizenz erhalten Sie unter
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Sofern nicht gesetzlich vorgeschrieben oder schriftlich vereinbart, wird die im Rahmen der Lizenz vertriebene Software "WIE BESEHEN" OHNE ausdrückliche oder stillschweigende Gewährleistungen oder Bedingungen jeglicher Art vertrieben. Siehe die Lizenz für die spezifische Sprache, die Berechtigungen und Beschränkungen unter der Lizenz regelt.
+
+Diese App verwendet GDNative wrapper for SQLite, die unter der folgenden Lizenz verfügbar ist:
+MIT Lizenz
+Copyright (c) 2019-2021 Piet Bronders & Jeroen De Geeter
+
+Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die "Software") erhält, kostenlos die Erlaubnis erteilt, mit der Software ohne Einschränkung zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen , Kopien der Software zu veröffentlichen, zu verteilen, unterzulizenzieren und/oder zu verkaufen und Personen, denen die Software zur Verfügung gestellt wird, dies zu gestatten, vorbehaltlich der folgenden Bedingungen:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD "WIE BESEHEN" BEREITGESTELLT, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNGEN DER MARKTFÄHIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG VON VERLETZUNGEN. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, OB AUS VERTRAGLICHEM, SCHLECHTER ODER ANDERWEITIGEM, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN HANDELN IN DER SOFTWARE.
+
+
+This app is made available under the following license:
+MIT license
+Copyright (c) 2007-2021 Lucas Rosswog
+
+This is used by anyone who has a copy of this software and its associated
+Documentation files (the "Software"), given free of charge permission to trade in the Software without limitation, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and / or copy copies of the Software or sell and permit persons to whom the software is made available to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial parts of the software.
+
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY, WHETHER CONTRACTUAL, BAD OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR USE OR OTHER TRADE IN THE SOFTWARE.
+
+This app uses the Godot Engine 3.4, which is available under the following license:
+MIT license
+Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2021 Godot Engine contributors.
+
+Any person who receives a copy of this software and the associated documentation files (the "Software") is hereby granted permission free of charge to deal with the software without restriction, including without limitation the rights to use, copy, modify, merge To publish, distribute, sublicense and / or sell copies of the software and to permit persons to whom the software is made available to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial parts of the software.
+
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY, WHETHER CONTRACTUAL, BAD OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR USE OR OTHER TRADE IN THE SOFTWARE.
+
+This app uses FreeType, which is available under the following license:
+Portions of this software are Copyright © 1996-2020 The FreeType Project (www.freetype.org). All rights reserved.
+
+This app uses ENet, which is available under the following license:
+MIT license
+Copyright (c) 2002-2020 Lee Salzman
+
+Any person who receives a copy of this software and the associated documentation files (the "Software") is hereby granted permission free of charge to deal with the software without restriction, including without limitation the rights to use, copy, modify, merge To publish, distribute, sublicense and / or sell copies of the software and to permit persons to whom the software is made available to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial parts of the software.
+
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY, WHETHER CONTRACTUAL, BAD OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR USE OR OTHER TRADE IN THE SOFTWARE.
+
+This app uses MBedTLS which is available under the following license:
+Copyright The Mbed TLS Contributors
+
+Licensed under the Apache License, Version 2.0 (the “License”); You may only use this file in accordance with the license. You can get a copy of the license at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by law or agreed in writing, the software distributed under the license is distributed "AS IS" WITHOUT express or implied warranties or conditions of any kind. See the license for the specific language that governs permissions and restrictions under the license.
+
+This app uses GDNative wrapper for SQLite, which is available under the following license:
+MIT license
+Copyright (c) 2019-2021 Piet Bronders & Jeroen De Geeter
+
+Any person who receives a copy of this software and the associated documentation files (the "Software") is hereby granted permission free of charge to deal with the software without restriction, including without limitation the rights to use, copy, modify, merge To publish, distribute, sublicense and / or sell copies of the software and to permit persons to whom the software is made available to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial parts of the software.
+
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY, WHETHER CONTRACTUAL, BAD OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR USE OR OTHER TRADE IN THE SOFTWARE.
+[/center]
