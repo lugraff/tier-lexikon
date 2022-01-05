@@ -1,4 +1,5 @@
-# tier-lexikon
+![Banner(1024x500px)](https://user-images.githubusercontent.com/93408437/148278361-90e12584-5932-4d4e-b6af-7673836ab69b.png)
+
 Du magst Tiere und bist wissbegierig? Dann bist du hier genau richtig!
 Das Tierlexikon ist eine App für dein Android Handy/Tablet oder auch für den Desktop, in der du dich über verschiedenste Tiere informieren kannst. Wenn du willst kannst du sogar selbst mithelfen, das Lexikon zu erweitern.
 
