@@ -1,0 +1,1669 @@
+[gd_scene load_steps=53 format=2]
+
+[ext_resource path="res://font/FontMedSmall.tres" type="DynamicFont" id=1]
+[ext_resource path="res://img/icon_back.png" type="Texture" id=2]
+[ext_resource path="res://tres/ButtonMenu.tres" type="StyleBox" id=3]
+[ext_resource path="res://img/slider01.png" type="Texture" id=4]
+[ext_resource path="res://img/frame2.png" type="Texture" id=5]
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=6]
+[ext_resource path="res://img/slider05.png" type="Texture" id=7]
+[ext_resource path="res://img/icon_filter.png" type="Texture" id=8]
+[ext_resource path="res://font/FontMedium.tres" type="DynamicFont" id=9]
+[ext_resource path="res://font/FontSmall.tres" type="DynamicFont" id=10]
+[ext_resource path="res://img/slider04.png" type="Texture" id=11]
+[ext_resource path="res://img/icon_remove.png" type="Texture" id=12]
+[ext_resource path="res://img/slider03.png" type="Texture" id=13]
+[ext_resource path="res://img/slider02.png" type="Texture" id=14]
+[ext_resource path="res://img/slider06.png" type="Texture" id=15]
+[ext_resource path="res://img/slider07.png" type="Texture" id=16]
+[ext_resource path="res://img/slider09.png" type="Texture" id=17]
+[ext_resource path="res://img/slider08.png" type="Texture" id=18]
+[ext_resource path="res://img/frame_back.png" type="Texture" id=19]
+[ext_resource path="res://tres/Popup.tres" type="StyleBox" id=20]
+[ext_resource path="res://img/icon_smaller.png" type="Texture" id=21]
+[ext_resource path="res://img/icon_bigger.png" type="Texture" id=22]
+[ext_resource path="res://img/icon_is.png" type="Texture" id=23]
+[ext_resource path="res://img/icon_empty.png" type="Texture" id=24]
+[ext_resource path="res://img/icon_isnot.png" type="Texture" id=25]
+[ext_resource path="res://img/icon_text.png" type="Texture" id=26]
+[ext_resource path="res://tres/ButtonSideR.tres" type="StyleBox" id=27]
+[ext_resource path="res://img/icon_search.png" type="Texture" id=28]
+[ext_resource path="res://font/FontMedBig.tres" type="DynamicFont" id=29]
+[ext_resource path="res://img/icon_sort.png" type="Texture" id=30]
+[ext_resource path="res://img/icon_steck.png" type="Texture" id=31]
+[ext_resource path="res://img/icon_message.png" type="Texture" id=32]
+[ext_resource path="res://img/icon_look2.png" type="Texture" id=33]
+[ext_resource path="res://img/icon_look.png" type="Texture" id=34]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+signal back_to_menu
+
+onready var foto = $Foto1
+onready var foto_anim = $Foto1/FotoAnim1
+onready var foto_w = $Foto2
+onready var foto_anim_w = $Foto2/FotoAnim2
+onready var timer =$Timer
+#----------------UI-Preload-----------------------------------------------------
+onready var ui = $UI
+onready var vsplit = $UI/VSplitContainer
+
+onready var f_item_zahl_popup = $UI/VSplitContainer/VBox/HBoxControl/FilterButton/PopupMenuItemZahl
+onready var f_item_zahl_name = $UI/VSplitContainer/VBox/HBoxControl/FilterButton/PopupMenuItemZahl/Label
+onready var f_item_zahl_operator = $UI/VSplitContainer/VBox/HBoxControl/FilterButton/PopupMenuItemZahl/Operator
+
+onready var textbox = $UI/VSplitContainer/VBox/MarginContainer/VBoxGenTex/TextBox
+onready var f_urheber = $UI/VSplitContainer/HBox/Credits/HBox/Attribution
+onready var f_lizenz = $UI/VSplitContainer/HBox/Credits/HBox/Licence
+onready var f_filename = $UI/VSplitContainer/HBox/Credits/HBox2/FileName
+onready var f_hinweis = $UI/VSplitContainer/HBox/Credits/HBox2/Hinweis
+onready var f_urheber_2 = $UI/VSplitContainer/HBox/Credits/HBox/Attribution2
+onready var f_lizenz_2 = $UI/VSplitContainer/HBox/Credits/HBox/Licence2
+onready var f_filename_2 = $UI/VSplitContainer/HBox/Credits/HBox2/FileName2
+onready var f_hinweis_2 = $UI/VSplitContainer/HBox/Credits/HBox2/Hinweis2
+onready var creator_text = $UI/VSplitContainer/VBox/EB/CreatorNames
+onready var eb_scroll = $UI/VSplitContainer/VBox/EB
+onready var text_zahl_filter = $UI/VSplitContainer/VBox/HBoxControl/FilterButton/PopupMenuItemZahl/PopupLineEdit
+
+onready var tierliste = $UI/TierScroll/Tierliste
+onready var tierliste_window = $UI/TierScroll
+onready var a_a_button = $UI/VSplitContainer/VBox/HBoxControl/AllAnimalMenu
+onready var filterliste = $UI/FilterScroll/Filterliste
+onready var filterliste_window = $UI/FilterScroll
+onready var filter_button = $UI/VSplitContainer/VBox/HBoxControl/FilterButton
+onready var filterliste2 = $UI/FilterScroll2/Filterliste2
+onready var filterliste2_window = $UI/FilterScroll2
+
+onready var steckbrief_window = $UI/VSplitContainer/VBox/MarginContainer/VBoxGenTex/SteckbriefWindow
+onready var steckbrief_cont = $UI/VSplitContainer/VBox/MarginContainer/VBoxGenTex/SteckbriefWindow/SteckbriefScroll/SteckbriefCont
+onready var steckbrief_button = $UI/VSplitContainer/VBox/HBoxControl/SteckbriefButton
+
+onready var sort_window = $UI/VSplitContainer/VBox/HBoxControl/SortButton/PopupMenuSort
+onready var sort_button = $UI/VSplitContainer/VBox/HBoxControl/SortButton
+
+onready var fehler_hinweis_window = $UI/FehlerHinweis
+onready var fehler_hinweis_text = $UI/FehlerHinweis/Box/HinweisText
+onready var fehler_hinweis_send_button = $UI/FehlerHinweis/Box/HBox/SendButton
+onready var keyboard_button = $UI/FehlerHinweis/Box/HBox/ButtonKeyboard
+onready var fehler_hinweis_button = $UI/VSplitContainer/VBox/HBoxControl/FehlerHinweisButton
+
+onready var sort_name = $UI/VSplitContainer/VBox/HBoxContainer/SortName
+onready var filter_name = $UI/VSplitContainer/VBox/HBoxContainer/FilterName
+#----------------Popup-Vars-----------------------------------------------------
+var operator_popup
+
+#-------------Arbeitsvariablen--------------------------------------------------
+var foto_link = \"\"
+var foto_link_2 = \"\"
+var lizenz_link = \"\"
+var lizenz_link_2 = \"\"
+var auswahl = \"\"
+var auswahl_clear_text = \"\"
+var aktual_filter_item_name = \"\"
+var image_m
+var image_w
+var menu_disable = false
+var result = {}
+var free_img_port = false
+var process_clipper = false
+var long_pressed = 0
+var lizenses = {}
+var sort_array = []
+#-----------------------Konstanten----------------------------------------------
+const font_spezial_path = \"res://font/FontSpezial.tres\"
+const points = 15 # Kann eingestellt werden: Punkte nach Eigenschaften
+#-------------------------Auto Funktionen---------------------------------------
+func _ready():
+	if OS.has_feature(\"pc\"):
+		keyboard_button.set_pressed(false)
+		keyboard_button.set_disabled(true)
+	if not G.online or G.my_status == \"OUTLAW\" or G.message_per_instance <= 0:
+		fehler_hinweis_button.set_disabled(true)
+	set_process(false) #Bei True wird gescrollt.
+# warning-ignore:return_value_discarded
+	get_tree().get_root().connect(\"size_changed\",self,\"resize\")
+	popup_config()
+	scroll_config()
+	resize()
+	lizenses = G.db_query(\"select * from item_Lizenz\")
+	load_a_a_menu(\"select name from Tiere\")
+	load_filter_menu()
+	load_sort_menu()
+
+func popup_config():
+	operator_popup = f_item_zahl_operator.get_popup()
+	operator_popup.add_font_override(\"font\",preload(\"res://font/FontMedium.tres\"))
+	operator_popup.add_stylebox_override(\"panel\",preload(\"res://tres/Popup.tres\"))
+	operator_popup.add_stylebox_override(\"hover\",preload(\"res://tres/PopupH.tres\"))
+	operator_popup.add_color_override(\"font_color_hover\",Color(1,0.54,0.31,1))
+
+func scroll_config():
+	if G.touch_input:
+		var eb_scroll_bar = eb_scroll.get_h_scrollbar()
+		eb_scroll_bar.add_stylebox_override(\"grabber_highlight\",preload(\"res://tres/empty.tres\"))
+		eb_scroll_bar.add_stylebox_override(\"grabber\",preload(\"res://tres/empty.tres\"))
+		eb_scroll_bar.add_stylebox_override(\"scroll_focus\",preload(\"res://tres/empty.tres\"))
+		eb_scroll_bar.add_stylebox_override(\"grabber_pressed\",preload(\"res://tres/empty.tres\"))
+		eb_scroll_bar.add_stylebox_override(\"scroll\",preload(\"res://tres/empty.tres\"))
+		var text_scroll_bar = textbox.get_v_scroll()
+		text_scroll_bar.add_stylebox_override(\"grabber_highlight\",preload(\"res://tres/empty.tres\"))
+		text_scroll_bar.add_stylebox_override(\"grabber\",preload(\"res://tres/empty.tres\"))
+		text_scroll_bar.add_stylebox_override(\"scroll_focus\",preload(\"res://tres/empty.tres\"))
+		text_scroll_bar.add_stylebox_override(\"grabber_pressed\",preload(\"res://tres/empty.tres\"))
+		text_scroll_bar.add_stylebox_override(\"scroll\",preload(\"res://tres/empty.tres\")) 
+		
+func resize():
+	ui.set_scale(Vector2(1.0/G.zoom,1.0/G.zoom))
+	if G.text_size == 1:
+		textbox.add_font_override(\"normal_font\",preload(\"res://font/FontMedSmall.tres\"))
+	elif G.text_size == 3:
+		textbox.add_font_override(\"normal_font\",preload(\"res://font/FontMedBig.tres\"))
+	else:
+		textbox.add_font_override(\"normal_font\",preload(\"res://font/FontMedium.tres\"))
+
+func load_a_a_menu(query_text):
+	for i in tierliste.get_child_count():
+		tierliste.get_child(i).disconnect(\"eintrag_pressed\", self, \"_on_AllAnimalsMenu_item_selected\")
+		tierliste.get_child(i).queue_free()
+	var loading_entries_array = []
+	if sort_window.is_item_checked(0):
+		var menu_list = G.db_query(query_text)
+		for i in menu_list.size():
+			var temp_text = menu_list[i][\"name\"]
+			temp_text = G._to_normal_name(temp_text)
+			loading_entries_array.append(temp_text)
+		loading_entries_array.sort()
+		sort_name.set_text(\"   Alphabet\")
+	else:
+		var sort_item_text = \"\"
+		for i in sort_window.get_item_count():
+			if sort_window.is_item_checked(i):
+				sort_item_text = \"item_zahl_\"+G._to_valid_name(sort_window.get_item_text(i))
+				sort_name.set_text(\"   \"+sort_window.get_item_text(i))
+				break
+		var filter_text = \"\"
+		if query_text.find(\"WHERE\") >= 0:
+			filter_text = \" AND \"+sort_item_text+\" IS NOT NULL\"
+		else:
+			filter_text = \" WHERE \"+sort_item_text+\" IS NOT NULL\"
+		var sort_text = \" order by \"+sort_item_text+\" ASC\"
+		var menu_list = G.db_query(query_text+filter_text+sort_text)
+		for i in menu_list.size():
+			var temp_text = menu_list[i][\"name\"]
+			temp_text = G._to_normal_name(temp_text)
+			loading_entries_array.append(temp_text)
+	for i in loading_entries_array.size():
+		var new_label = preload(\"res://scripts/Eintrag.tscn\").instance()
+		new_label._set_name(loading_entries_array[i])
+		new_label.connect(\"eintrag_pressed\", self, \"_on_AllAnimalsMenu_item_selected\", [i])
+		tierliste.add_child(new_label)
+
+func load_sort_menu():
+	for i in sort_array.size():
+		if sort_array[i].begins_with(\"item_zahl_\"):
+			sort_window.add_radio_check_item(G._to_normal_name(str(sort_array[i])))
+		
+func load_filter_menu():
+	for i in filterliste.get_child_count():
+		filterliste.get_child(i).disconnect(\"eintrag_pressed\", self, \"_on_FilterButton_item_selected\")
+		filterliste.get_child(i).queue_free()
+	var no_filter = preload(\"res://scripts/Eintrag.tscn\").instance()
+	no_filter._set_name(\"Kein Filter\")
+	no_filter.connect(\"eintrag_pressed\", self, \"_on_FilterButton_item_selected\", [filterliste.get_child_count()])
+	filterliste.add_child(no_filter)
+	var filter_list = G.db_query(\"select * from Tiere WHERE name LIKE 'tier_Abgottschlange'\")
+	filter_list = filter_list[0].keys()
+	var filter_array = []
+	for i in filter_list.size():
+		if filter_list[i].begins_with(\"item_\"):
+			if filter_list[i] != \"item_Lizenz\":
+				filter_array.append(filter_list[i])
+	sort_array = filter_array
+	filter_array.sort()
+	for i in filter_array.size():
+		if filter_array[i].begins_with(\"item_mul_\"):
+			var item_name = G._to_normal_name(str(filter_array[i]))+\"   \"
+			var new_label = preload(\"res://scripts/Eintrag.tscn\").instance()
+			new_label._set_name(item_name)
+			new_label.connect(\"eintrag_pressed\", self, \"_on_FilterButton_item_selected\", [filterliste.get_child_count()])
+			if sort_name.get_text() != \"   Alphabet\":
+				new_label.set_self_modulate(Color(0.5,0.5,0.5,1))
+			filterliste.add_child(new_label)
+		elif filter_array[i].begins_with(\"item_zahl_\"):
+			var item_name = G._to_normal_name(str(filter_array[i]))+\" \"
+			var new_label = preload(\"res://scripts/Eintrag.tscn\").instance()
+			new_label._set_name(item_name)
+			new_label.connect(\"eintrag_pressed\", self, \"_on_FilterButton_item_selected\", [filterliste.get_child_count()])
+			filterliste.add_child(new_label)
+		elif filter_array[i].begins_with(\"item_\"):
+			var item_name = G._to_normal_name(str(filter_array[i]))+\"  \"
+			var new_label = preload(\"res://scripts/Eintrag.tscn\").instance()
+			new_label._set_name(item_name)
+			new_label.connect(\"eintrag_pressed\", self, \"_on_FilterButton_item_selected\", [filterliste.get_child_count()])
+			filterliste.add_child(new_label)
+		
+	
+func _on_FilterButton_item_selected(index):
+	for i in filterliste2.get_child_count():
+		filterliste2.get_child(i).queue_free()
+	filterliste_window.set_visible(false)
+	filter_button.set_pressed(false)
+	var item_name = filterliste.get_child(index)._get_name()
+	if item_name.ends_with(\"   \"):
+		item_name = \"item_mul_\"+G._to_valid_name(item_name)
+		item_name.erase(item_name.length()-3,3)
+		var item_entries = G.db_query(\"select * from \"+item_name)
+		item_entries.sort_custom(MyCustomSorter, \"sort_ascending\")
+		for i in item_entries.size():
+			var new_label = preload(\"res://scripts/Eintrag.tscn\").instance()
+			new_label._set_name(item_entries[i][\"name\"])
+			new_label.connect(\"eintrag_pressed\", self, \"_on_PopupMenuItemMul_index_pressed\", [item_entries[i][\"id\"],i])
+			filterliste2.add_child(new_label)
+		aktual_filter_item_name = item_name
+		filterliste2_window.set_visible(true)
+	elif item_name.ends_with(\"  \"):
+		item_name = \"item_\"+G._to_valid_name(item_name)
+		item_name.erase(item_name.length()-2,2)
+		var item_entries = G.db_query(\"select * from \"+item_name)
+		item_entries.sort_custom(MyCustomSorter, \"sort_ascending\")
+		for i in item_entries.size():
+			var new_label = preload(\"res://scripts/Eintrag.tscn\").instance()
+			new_label._set_name(item_entries[i][\"name\"])
+			new_label.connect(\"eintrag_pressed\", self, \"_on_PopupMenuItem_index_pressed\", [item_entries[i][\"id\"],i])
+			filterliste2.add_child(new_label)
+		aktual_filter_item_name = item_name
+		filterliste2_window.set_visible(true)
+	elif item_name.ends_with(\" \"):
+		item_name = \"item_zahl_\"+G._to_valid_name(item_name)
+		item_name.erase(item_name.length()-1,1)
+		aktual_filter_item_name = item_name
+		if aktual_filter_item_name != \"Kein Filter\":
+			f_item_zahl_name.set_text(G._to_normal_name(aktual_filter_item_name))
+			f_item_zahl_popup.set_visible(true)
+	if item_name == \"Kein Filter\":
+		aktual_filter_item_name = \"\"
+		load_a_a_menu(\"select name from Tiere\")
+		sort_button.set_disabled(false)
+		filter_name.set_text(\"   Kein Filter\")
+
+class MyCustomSorter:
+	static func sort_ascending(a, b):
+		if a[\"name\"] < b[\"name\"]:
+			return true
+		return false
+
+func _on_PopupMenuItem_index_pressed(index,i):
+	filterliste2_window.set_visible(false)
+	filter_button.set_pressed(false)
+	load_a_a_menu(\"select name from Tiere WHERE \"+aktual_filter_item_name+\" LIKE \"+str(index))
+	sort_button.set_disabled(false)
+	filter_name.set_text(\"   \"+G._to_normal_name(aktual_filter_item_name)+\": \"+filterliste2.get_child(i)._get_name())
+
+func _on_PopupMenuItemMul_index_pressed(index,i):
+	filterliste2_window.set_visible(false)
+	filter_button.set_pressed(false)
+	var multi_liste = G.db_query(\"select \"+aktual_filter_item_name+\" from Tiere\")
+	var unformat_tierliste = G.SW_entries
+	var temp_tierliste = []
+	for i in unformat_tierliste.size():
+		if i != 0:
+			if unformat_tierliste[i][0].begins_with(\"tier_\"):
+				temp_tierliste.append(G._to_normal_name(unformat_tierliste[i][0]))
+	var multi_tier_liste_fertig = []
+	for i in multi_liste.size():
+		var multi_text = str(multi_liste[i][aktual_filter_item_name])
+		multi_text = multi_text.replace(\"True\",\"\\\"true\\\"\")
+		multi_text = multi_text.replace(\"False\",\"\\\"false\\\"\")
+		var ergebnis = str2var(multi_text)
+		if ergebnis.size()-1 >= index: 
+			if ergebnis[index] == \"true\":
+				multi_tier_liste_fertig.append(temp_tierliste[i])
+	multi_tier_liste_fertig.sort()
+	for i in tierliste.get_child_count():
+		tierliste.get_child(i).queue_free()
+	yield(get_tree().create_timer(0.1), \"timeout\")
+	for i in multi_tier_liste_fertig.size():
+		var new_label = preload(\"res://scripts/Eintrag.tscn\").instance()
+		new_label._set_name(multi_tier_liste_fertig[i])
+		new_label.connect(\"eintrag_pressed\", self, \"_on_AllAnimalsMenu_item_selected\", [i])
+		tierliste.add_child(new_label)
+	sort_button.set_disabled(true)
+	sort_name.set_text(\"   Alphabet\")
+	filter_name.set_text(\"   \"+G._to_normal_name(aktual_filter_item_name)+\": \"+filterliste2.get_child(i)._get_name())
+
+func _on_SearchButton_pressed():
+	_on_PopupLineEdit_text_entered(text_zahl_filter.get_text())
+func _on_PopupLineEdit_text_entered(new_text):
+	if new_text.is_valid_float() or new_text.is_valid_integer():
+		var operator = \"=\"
+		if f_item_zahl_operator.get_selected() == 0:
+			operator = \"=\"
+		elif f_item_zahl_operator.get_selected() == 1:
+			operator = \"<\"
+		elif f_item_zahl_operator.get_selected() == 2:
+			operator = \">\"
+		elif f_item_zahl_operator.get_selected() == 3:
+			operator = \"!=\"
+		load_a_a_menu(\"select name from Tiere WHERE \"+aktual_filter_item_name+\" \"+operator+\" \"+new_text)
+		filter_name.set_text(\"   \"+G._to_normal_name(aktual_filter_item_name)+\" \"+operator+\" \"+new_text)#neu
+	else:
+		aktual_filter_item_name = \"\"
+		load_a_a_menu(\"select name from Tiere\")
+		filter_name.set_text(\"   Kein Filter\")
+	f_item_zahl_popup.set_visible(false)
+	sort_button.set_disabled(false)
+	
+func _on_SortButton_pressed():
+	if sort_window.is_visible():
+		sort_window.set_visible(false)
+	else:
+		filterliste_window.set_visible(false)
+		filterliste2_window.set_visible(false)
+		tierliste_window.set_visible(false)
+		sort_window.set_visible(true)
+func _on_PopupMenuSort_index_pressed(index):
+	for i in sort_window.get_item_count():
+		sort_window.set_item_checked(i,false)
+	sort_window.set_item_checked(index,true)
+	load_a_a_menu(\"select name from Tiere\")
+	filter_name.set_text(\"   Kein Filter\")
+	for i in filterliste.get_child_count():
+		filterliste.get_child(i).disconnect(\"eintrag_pressed\", self, \"_on_FilterButton_item_selected\")
+		filterliste.get_child(i).queue_free()
+	yield(get_tree(), \"idle_frame\")
+	load_filter_menu()
+
+func disable_ui():
+	menu_disable = true
+	a_a_button.set_disabled(true)
+
+func enable_ui():
+	a_a_button.set_disabled(false)
+	menu_disable = false
+	if G.auto_scroll: set_process(true)
+
+func _process(_delta):
+		if G.auto_scroll > 0:
+			var aktual_scroll : float = textbox.get_v_scroll().get_value()
+			if aktual_scroll < textbox.get_v_scroll().get_max():
+				textbox.get_v_scroll().set_value(aktual_scroll + G.auto_scroll)
+			else:
+				set_process(false)
+
+func _on_TextBox_gui_input(event):
+	if timer.is_stopped():
+		if is_processing():
+			set_process(false)
+		else:
+			if event is InputEventScreenTouch:
+				if long_pressed < 39:
+					long_pressed += 10
+				else:
+					set_process(true)
+					timer.start(1.5)
+					long_pressed = 0
+			elif event is InputEventScreenDrag:
+				long_pressed -= 1
+			
+	
+#-------------------------Buttons-----------------------------------------------
+func _on_AllAnimalMenu_toggled(button_pressed):
+	if button_pressed:
+		filterliste_window.set_visible(false)
+		filterliste2_window.set_visible(false)
+		sort_window.set_visible(false)
+	tierliste_window.set_visible(button_pressed)
+
+func _on_FilterButton_toggled(button_pressed):
+	sort_window.set_visible(false)
+	filterliste2_window.set_visible(false)
+	f_item_zahl_popup.set_visible(false)
+	if button_pressed:
+		_on_FilterButton_item_selected(0)
+		tierliste_window.set_visible(false)
+	filterliste_window.set_visible(button_pressed)
+	
+	
+func _on_AllAnimalsMenu_item_selected(index):
+	sort_window.set_visible(false)
+	tierliste_window.set_visible(false)
+	a_a_button.set_pressed(false)
+	disable_ui()
+	foto_anim.play(\"fade_out\")
+	foto_anim_w.play(\"fade_out\")
+	yield(get_tree().create_timer(0.3), \"timeout\")
+	steckbrief_window.set_visible(false)
+	steckbrief_button.set_pressed(false)
+	for i in steckbrief_cont.get_child_count():
+		steckbrief_cont.get_child(i).queue_free()
+	foto.set_visible(true)
+	foto_anim.play(\"fade_in\")
+	f_urheber.set_visible(true)
+	f_urheber_2.set_visible(false)
+	f_lizenz.set_visible(true)
+	f_lizenz_2.set_visible(false)
+	f_filename.set_visible(true)
+	f_filename_2.set_visible(false)
+	f_hinweis.set_visible(true)
+	f_hinweis_2.set_visible(false)
+	foto.set_texture(null)
+	foto_w.set_texture(null)
+	textbox.scroll_to_line(0)
+	#-------------oben wird aufgeräumt------
+	auswahl_clear_text = tierliste.get_child(index)._get_name()
+	auswahl = \"tier_\"+auswahl_clear_text
+	auswahl = G._to_valid_name(auswahl)
+	result = G.db_query(\"select * from Tiere WHERE name = '\"+auswahl+\"'\")
+	display_text()
+	load_foto_1()
+	if not G.online:
+		enable_ui()
+
+func display_text():
+	fehler_hinweis_text.set_text(auswahl_clear_text+\": \\n\")
+	creator_text.set_text(\"Erstellt von \"+str(result[0][\"ersteller\"]))
+	if result[0][\"bearbeiter\"] != null:
+		creator_text.set_text(\"Erstellt von \"+str(result[0][\"ersteller\"])+\" und verarbeitet von \"+str(result[0][\"bearbeiter\"]))
+	var temp_result_beschr = str2var(result[0][\"t_beschreibung\"])
+	var temp_result_beschr_url = str2var(result[0][\"t_url\"])
+	var result_beschr = \"\"
+	for i in temp_result_beschr.size():
+		var temp_result_beschr_lizenz = lizenses[(str2var(result[0][\"t_lizenz\"])[i])-1][\"name\"]
+		result_beschr = result_beschr +\"\\n\"+ str(temp_result_beschr[i])+\"\\n[url]\"+str(temp_result_beschr_url[i])+\"[/url]\\nunter \"+str(temp_result_beschr_lizenz)+\"\\n\"#+\"\\n\"
+	var eigenschaften = \"\"
+	var eigenschafts_data = []
+	for i in result[0].size():
+		if i != 0:
+			if result[0].keys()[i] != \"item_Lizenz\":
+				if result[0].keys()[i].begins_with(\"item_zahl_\"):
+					if result[0].values()[i] != null:
+						var temp_item_name = result[0].keys()[i]
+						temp_item_name = G._to_normal_name(temp_item_name)
+						var spaces = points - temp_item_name.length()
+						var space_text = \"\"
+						for s in spaces:
+							space_text += \" \"
+						space_text += \"	\"
+						eigenschaften = eigenschaften +\"\\n[color=#ccc]\"+ str(temp_item_name) +\":[/color][color=#88c498]\"+space_text+str(result[0].values()[i])+\"[/color]\"
+						eigenschafts_data.append([str(temp_item_name),str(result[0].values()[i])])
+				elif result[0].keys()[i].begins_with(\"item_mul_\"):
+					if result[0].values()[i] != null:
+						var temp_item_name = result[0].keys()[i]
+						temp_item_name = G._to_normal_name(temp_item_name)
+						var spaces = points - temp_item_name.length()
+						var space_text = \"\"
+						for s in spaces:
+							space_text += \" \"
+						space_text += \"	\"
+						var mul_namen = G.db_query(\"select name from \"+str(result[0].keys()[i]))
+						var mul_entries = \"\"
+						var check_mul = result[0].values()[i].to_lower()
+						check_mul = str2var(check_mul)
+						for m in check_mul.size():
+							if check_mul[m]:
+								mul_entries = mul_entries + mul_namen[m][\"name\"] +\", \"
+						eigenschaften = eigenschaften +\"\\n[color=#ccc]\"+ str(temp_item_name) +\":[/color][color=#88c498]\"+space_text+mul_entries+\"[/color]\"
+						eigenschafts_data.append([str(temp_item_name),mul_entries])
+				elif result[0].keys()[i].begins_with(\"item_\"):
+					var eig_name = G.db_query(\"select name from \"+str(result[0].keys()[i])+\" WHERE id = \"+str(result[0].values()[i])+\"\")
+					if eig_name.size() != 0:
+						var temp_item_name = result[0].keys()[i]
+						temp_item_name = G._to_normal_name(temp_item_name)
+						eigenschafts_data.append([str(temp_item_name),str(eig_name[0][\"name\"])])
+	var bbcode_titel_name = \"[font=res://font/FontSpezial.tres]\"+str(auswahl_clear_text)+\"[/font]\"
+	if auswahl_clear_text.length() > 14:
+		if auswahl_clear_text.find(\" \", 0) <= 14:
+			if auswahl_clear_text.rfind(\" \", 0) <= 14:
+				bbcode_titel_name = \"[font=res://font/FontSpezial2.tres]\"+str(auswahl_clear_text)+\"[/font]\"
+	textbox.set_bbcode(\"\\n\\n[center][b][color=#ffe3a6]\"+str(bbcode_titel_name)+\"[/color][/b]\\n\\n\\n\\n\\n[color=#ccc]\"+str(result_beschr))
+	make_steckbrief(eigenschafts_data)
+
+func make_steckbrief(steck_data):
+	var spezial1_cont = HBoxContainer.new()
+	spezial1_cont.set_h_size_flags(4)
+	spezial1_cont.set(\"custom_constants/separation\", 128)
+	steckbrief_cont.add_child(spezial1_cont)
+	for i in steck_data.size():
+		if steck_data[i][1] != \"\":
+			if steck_data[i][0] == \"Ø Größe in CM\":
+				var new_steck = load(\"res://scripts/SteckbriefEintragGrosse.tscn\").instance()
+				new_steck._set_data(steck_data[i])
+				spezial1_cont.add_child(new_steck)
+			elif steck_data[i][0] == \"Ø Gewicht in KG\":
+				var new_steck = load(\"res://scripts/SteckbriefEintragMasse.tscn\").instance()
+				new_steck._set_data(steck_data[i])
+				spezial1_cont.add_child(new_steck)
+			elif steck_data[i][0] == \"Region\":
+				var new_steck = load(\"res://scripts/SteckbriefEintragRegion.tscn\").instance()
+				new_steck._set_data(steck_data[i])
+				steckbrief_cont.add_child(new_steck)
+			else:
+				var new_steck = preload(\"res://scripts/SteckbriefEintrag.tscn\").instance()
+				new_steck._set_data(steck_data[i])
+				steckbrief_cont.add_child(new_steck)
+	if str(result[0][\"t_besonderes\"]) != \"Null\":
+		if str(result[0][\"t_besonderes\"]) != \"\":
+			var new_besonderes = preload(\"res://scripts/SteckbriefBesonderes.tscn\").instance()
+			new_besonderes._set_data(str(result[0][\"t_besonderes\"]))
+			steckbrief_cont.add_child(new_besonderes)
+
+func load_foto_1():
+	var result_foto_l = result[0][\"f_url_m\"]
+	if result_foto_l != null and result_foto_l != \"\":
+		var result_urheber = result[0][\"f_urheber_m\"]
+		if result_urheber != null:
+			f_urheber.set_text(str(result_urheber))
+			var result_lizenz = result[0][\"f_lizenz_m\"]
+			if result_lizenz != null:
+				f_lizenz.set_text(lizenses[result_lizenz][\"name\"])
+				lizenz_link = G.lizenz_links[lizenses[result_lizenz][\"name\"]]
+				var result_filename = result[0][\"f_filename_m\"]
+				if result_filename != null:
+					f_filename.set_text(result_filename)
+					foto_link = result[0][\"f_p_url_m\"]
+					if str2var(result[0][\"f_form_m\"])[\"flip\"] == true: f_hinweis.set_text(\"(Ausschnitt,\\ngespiegelt)\")
+					else: f_hinweis.set_text(\"(Ausschnitt)\\n\")
+					var img_file = File.new()
+					if img_file.file_exists(\"user://img/\"+auswahl+\"_m.png\"):
+						var tex = ImageTexture.new()
+						var img = Image.new()
+						img.load(\"user://img/\"+auswahl+\"_m.png\")
+						tex.create_from_image(img, 4)
+						foto_anim.play(\"fade_in\")
+						foto.set_texture(tex)
+						load_foto_2()
+					else:
+						var result_foto_form = result[0][\"f_form_m\"]
+						if result_foto_form != null:
+							result_foto_form = str2var(result_foto_form)
+						else:
+							result_foto_form = {\"scale\" : 1,\"pos_x\" : 0,\"pos_y\" : 0,\"flip\" : false}
+						while not free_img_port:
+							free_img_port = get_node(\"/root/Base/ImgMaker\").get_image_from_internet(auswahl,\"m\",result_foto_l,result_foto_form[\"scale\"],result_foto_form[\"pos_x\"],result_foto_form[\"pos_y\"],result_foto_form[\"flip\"])
+						free_img_port = false
+					img_file.close()
+	else:
+		enable_ui()
+
+func _set_foto1_texture():
+	var img_file = File.new()
+	if img_file.file_exists(\"user://img/\"+auswahl+\"_m.png\"):
+		var tex = ImageTexture.new()
+		var img = Image.new()
+		img.load(\"user://img/\"+auswahl+\"_m.png\")
+		tex.create_from_image(img, 4)
+		foto_anim.play(\"fade_in\")
+		foto.set_texture(tex)
+	img_file.close()
+	yield(get_tree(), \"idle_frame\")
+	load_foto_2()
+
+func load_foto_2():
+	var result_foto_l_w = result[0][\"f_url_w\"]
+	if result_foto_l_w != null and result_foto_l_w != \"\":
+		var result_urheber_2 = result[0][\"f_urheber_w\"]
+		if result_urheber_2 != null:
+			f_urheber_2.set_text(str(result_urheber_2))
+			var result_lizenz_2 = result[0][\"f_lizenz_w\"]
+			if result_lizenz_2 != null:
+				f_lizenz_2.set_text(lizenses[result_lizenz_2][\"name\"])
+				lizenz_link_2 = G.lizenz_links[lizenses[result_lizenz_2][\"name\"]]
+				var result_filename_2 = result[0][\"f_filename_w\"]
+				if result_filename_2 != null:
+					f_filename_2.set_text(result_filename_2)
+					foto_link_2 = result[0][\"f_p_url_w\"]
+					if str2var(result[0][\"f_form_w\"])[\"flip\"] == true: f_hinweis_2.set_text(\"(Ausschnitt,\\ngespiegelt)\")
+					else: f_hinweis_2.set_text(\"(Ausschnitt)\\n\")
+					var img_file = File.new()
+					if img_file.file_exists(\"user://img/\"+auswahl+\"_w.png\"):
+						var tex = ImageTexture.new()
+						var img = Image.new()
+						img.load(\"user://img/\"+auswahl+\"_w.png\")
+						tex.create_from_image(img, 4)
+						foto_anim_w.play(\"fade_in\")
+						foto_w.set_texture(tex)
+						enable_ui()
+					else:
+						var result_foto_form_2 = result[0][\"f_form_w\"]
+						if result_foto_form_2 != null:
+							result_foto_form_2 = str2var(result_foto_form_2)
+						else:
+							result_foto_form_2 = {\"scale\" : 1,\"pos_x\" : 0,\"pos_y\" : 0,\"flip\" : false}
+						while not free_img_port:
+							free_img_port = get_node(\"/root/Base/ImgMaker\").get_image_from_internet(auswahl,\"w\",result_foto_l_w,result_foto_form_2[\"scale\"],result_foto_form_2[\"pos_x\"],result_foto_form_2[\"pos_y\"],result_foto_form_2[\"flip\"])
+						free_img_port = false
+					img_file.close()
+	else:
+		enable_ui()
+
+func _set_foto2_texture():
+	var img_file = File.new()
+	if img_file.file_exists(\"user://img/\"+auswahl+\"_w.png\"):
+		var tex = ImageTexture.new()
+		var img = Image.new()
+		img.load(\"user://img/\"+auswahl+\"_w.png\")
+		tex.create_from_image(img, 4)
+		foto_anim_w.play(\"fade_in\")
+		foto_w.set_texture(tex)
+		enable_ui()
+	img_file.close()
+
+func _on_LinkButton_pressed():
+	if menu_disable: return
+	if foto.is_visible():
+		OS.set_clipboard(foto_link)
+		if foto_link.begins_with(\"https://\"):
+# warning-ignore:return_value_discarded
+			OS.shell_open(foto_link)
+	elif foto_w.is_visible():
+		OS.set_clipboard(foto_link_2)
+		if foto_link_2.begins_with(\"https://\"):
+# warning-ignore:return_value_discarded
+			OS.shell_open(foto_link_2)
+	get_node(\"/root/Base\")._show_info(\"Weblink kopiert\")
+
+func _on_Licence_pressed():
+	if menu_disable: return
+	if foto.is_visible():
+		OS.set_clipboard(lizenz_link)
+		if lizenz_link.begins_with(\"https://\"):
+# warning-ignore:return_value_discarded
+			OS.shell_open(lizenz_link)
+	get_node(\"/root/Base\")._show_info(\"Weblink kopiert\")
+
+func _on_Licence2_pressed():
+	if menu_disable: return
+	if foto_w.is_visible():
+		OS.set_clipboard(foto_link_2)
+		if foto_link_2.begins_with(\"https://\"):
+# warning-ignore:return_value_discarded
+			OS.shell_open(foto_link_2)
+	get_node(\"/root/Base\")._show_info(\"Weblink kopiert\")
+
+func _on_TextBox_meta_clicked(meta):
+	OS.set_clipboard(meta)
+	if meta.begins_with(\"https://\"):
+# warning-ignore:return_value_discarded
+		OS.shell_open(meta)
+	get_node(\"/root/Base\")._show_info(\"Weblink kopiert\")
+
+func _right_swipe():
+	if foto_w.is_visible():
+		f_urheber.set_visible(true)
+		f_urheber_2.set_visible(false)
+		f_lizenz.set_visible(true)
+		f_lizenz_2.set_visible(false)
+		f_filename.set_visible(true)
+		f_filename_2.set_visible(false)
+		f_hinweis.set_visible(true)
+		f_hinweis_2.set_visible(false)
+		foto_anim.play(\"fade_in\")
+		foto_anim_w.play(\"fade_out\")
+		foto.set_visible(true)
+
+func _left_swipe():
+	if foto.is_visible():
+		f_urheber.set_visible(false)
+		f_urheber_2.set_visible(true)
+		f_lizenz.set_visible(false)
+		f_lizenz_2.set_visible(true)
+		f_filename.set_visible(false)
+		f_filename_2.set_visible(true)
+		f_hinweis.set_visible(false)
+		f_hinweis_2.set_visible(true)
+		foto_anim.play(\"fade_out\")
+		foto_anim_w.play(\"fade_in\")
+		foto_w.set_visible(true)
+
+func _on_SteckbriefButton_toggled(button_pressed):
+	steckbrief_window.set_visible(button_pressed)
+	textbox.set_visible(!button_pressed)
+	
+	
+func _on_ButtonBack_pressed():
+	emit_signal(\"back_to_menu\")
+	queue_free()
+	
+#-----------------Animation-Player----------------------------------------------
+func _on_FotoAnim1_animation_finished(anim_name):
+	if anim_name == \"fade_out\":
+		foto.set_visible(false)
+
+func _on_FotoAnim2_animation_finished(anim_name):
+	if anim_name == \"fade_out\":
+		foto_w.set_visible(false)
+#----------------------Fehler_Hinweis_Funktions---------------------------------
+
+func _on_FehlerHinweisButton_toggled(button_pressed):
+	fehler_hinweis_window.set_visible(button_pressed)
+
+func _on_ButtonKeyboard_toggled(button_pressed):
+	fehler_hinweis_text.set_virtual_keyboard_enabled(button_pressed)
+
+func _on_SendButton_pressed():
+	yield(get_tree(), \"idle_frame\")
+	var sending_text = fehler_hinweis_text.get_text()
+	if sending_text != auswahl_clear_text+\": \\n\":
+		if sending_text != \"\":
+			var metadata = {\"sending_text\": sending_text}
+			fehler_hinweis_window.set_visible(false)
+			fehler_hinweis_button.set_pressed(false)
+			yield(SilentWolf.Scores.persist_score(str(OS.get_unique_id()), OS.get_unix_time(), \"main\", metadata), \"sw_score_posted\")
+			get_node(\"/root/Base\")._show_info(\"Nachricht gesendet!\")
+			fehler_hinweis_text.set_text(auswahl_clear_text+\": \\n\")
+			G.message_per_instance -= 1
+			
+func _on_HinweisText_text_changed():
+	var long = fehler_hinweis_text.get_text().length()
+	var max_long = 999
+	if long > max_long:
+		var del_long = long - max_long
+		var old_text = fehler_hinweis_text.get_text()
+		old_text.erase(0-1,del_long)
+		fehler_hinweis_text.set_text(old_text)
+"
+
+[sub_resource type="CanvasItemMaterial" id=19]
+blend_mode = 2
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_in_inet"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade_in_int"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="AnimatedTexture" id=8]
+flags = 4
+frames = 18
+fps = 14.0
+frame_0/texture = ExtResource( 4 )
+frame_1/texture = ExtResource( 14 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 13 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 11 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 7 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 15 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 16 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 18 )
+frame_7/delay_sec = 0.0
+frame_8/texture = ExtResource( 17 )
+frame_8/delay_sec = 0.0
+frame_9/texture = ExtResource( 17 )
+frame_9/delay_sec = 0.0
+frame_10/texture = ExtResource( 18 )
+frame_10/delay_sec = 0.0
+frame_11/texture = ExtResource( 16 )
+frame_11/delay_sec = 0.0
+frame_12/texture = ExtResource( 15 )
+frame_12/delay_sec = 0.0
+frame_13/texture = ExtResource( 7 )
+frame_13/delay_sec = 0.0
+frame_14/texture = ExtResource( 11 )
+frame_14/delay_sec = 0.0
+frame_15/texture = ExtResource( 13 )
+frame_15/delay_sec = 0.0
+frame_16/texture = ExtResource( 14 )
+frame_16/delay_sec = 0.0
+frame_17/texture = ExtResource( 4 )
+frame_17/delay_sec = 0.0
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="CanvasItemMaterial" id=15]
+blend_mode = 2
+
+[sub_resource type="StyleBoxEmpty" id=24]
+
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 0, 0, 0, 0.784314 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+corner_radius_top_left = 64
+corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id=25]
+
+[node name="FotoABC" type="Node2D"]
+self_modulate = Color( 1, 1, 1, 0 )
+script = SubResource( 1 )
+
+[node name="Foto1" type="Sprite" parent="."]
+visible = false
+self_modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 45 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1080, 1080 )
+region_filter_clip = true
+
+[node name="Back" type="Sprite" parent="Foto1"]
+material = SubResource( 19 )
+position = Vector2( 0, -64 )
+z_index = -1
+texture = ExtResource( 19 )
+centered = false
+
+[node name="FotoAnim1" type="AnimationPlayer" parent="Foto1"]
+anims/fade_in = SubResource( 2 )
+anims/fade_in_int = SubResource( 3 )
+anims/fade_out = SubResource( 4 )
+
+[node name="Foto2" type="Sprite" parent="."]
+visible = false
+self_modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 45 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1080, 1080 )
+region_filter_clip = true
+
+[node name="Back" type="Sprite" parent="Foto2"]
+material = SubResource( 19 )
+position = Vector2( 0, -64 )
+z_index = -1
+texture = ExtResource( 19 )
+centered = false
+
+[node name="FotoAnim2" type="AnimationPlayer" parent="Foto2"]
+anims/fade_in = SubResource( 5 )
+anims/fade_in_int = SubResource( 6 )
+anims/fade_out = SubResource( 7 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="VSplitContainer" type="VSplitContainer" parent="UI"]
+margin_right = 1080.0
+margin_bottom = 1920.0
+rect_min_size = Vector2( 1080, 1920 )
+custom_constants/autohide = 0
+custom_constants/separation = 210
+custom_icons/grabber = SubResource( 8 )
+split_offset = 1125
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="UI/VSplitContainer"]
+margin_right = 1080.0
+margin_bottom = 136.0
+size_flags_vertical = 0
+custom_constants/separation = 32
+
+[node name="Credits" type="VBoxContainer" parent="UI/VSplitContainer/HBox"]
+margin_right = 984.0
+margin_bottom = 136.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="HBox" type="HBoxContainer" parent="UI/VSplitContainer/HBox/Credits"]
+margin_right = 984.0
+margin_bottom = 43.0
+custom_constants/separation = 16
+
+[node name="from" type="Label" parent="UI/VSplitContainer/HBox/Credits/HBox"]
+margin_right = 110.0
+margin_bottom = 43.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+text = "Foto v."
+align = 1
+
+[node name="Attribution" type="Label" parent="UI/VSplitContainer/HBox/Credits/HBox"]
+margin_left = 126.0
+margin_right = 446.0
+margin_bottom = 43.0
+rect_min_size = Vector2( 320, 0 )
+size_flags_vertical = 1
+custom_colors/font_color = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "Urheber"
+align = 1
+autowrap = true
+
+[node name="Attribution2" type="Label" parent="UI/VSplitContainer/HBox/Credits/HBox"]
+visible = false
+margin_left = 80.0
+margin_top = 1317.0
+margin_right = 416.0
+margin_bottom = 1360.0
+rect_min_size = Vector2( 290, 0 )
+size_flags_vertical = 1
+custom_colors/font_color = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "Urheber"
+align = 1
+autowrap = true
+
+[node name="by" type="Label" parent="UI/VSplitContainer/HBox/Credits/HBox"]
+margin_left = 462.0
+margin_right = 546.0
+margin_bottom = 43.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+text = "unter"
+align = 1
+
+[node name="Licence" type="LinkButton" parent="UI/VSplitContainer/HBox/Credits/HBox"]
+margin_left = 562.0
+margin_right = 659.0
+margin_bottom = 43.0
+custom_colors/font_color_focus = Color( 1, 0.941176, 0.431373, 1 )
+custom_colors/font_color = Color( 1, 0.941176, 0.431373, 1 )
+custom_colors/font_color_hover = Color( 1, 0.941176, 0.431373, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.941176, 0.431373, 1 )
+custom_fonts/font = ExtResource( 10 )
+shortcut_in_tooltip = false
+text = "Lizenz"
+
+[node name="Licence2" type="LinkButton" parent="UI/VSplitContainer/HBox/Credits/HBox"]
+visible = false
+margin_left = 406.0
+margin_top = 1317.0
+margin_right = 582.0
+margin_bottom = 1360.0
+custom_colors/font_color_focus = Color( 1, 0.941176, 0.431373, 1 )
+custom_colors/font_color = Color( 1, 0.941176, 0.431373, 1 )
+custom_colors/font_color_hover = Color( 1, 0.941176, 0.431373, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.941176, 0.431373, 1 )
+custom_fonts/font = ExtResource( 10 )
+shortcut_in_tooltip = false
+text = "Lizenz"
+
+[node name="LinkButtonFoto" type="LinkButton" parent="UI/VSplitContainer/HBox/Credits/HBox"]
+margin_left = 833.0
+margin_right = 984.0
+margin_bottom = 43.0
+focus_mode = 2
+size_flags_horizontal = 10
+custom_colors/font_color = Color( 1, 0.941176, 0.431373, 1 )
+custom_fonts/font = ExtResource( 10 )
+shortcut_in_tooltip = false
+text = "Foto-Link"
+
+[node name="HBox2" type="HBoxContainer" parent="UI/VSplitContainer/HBox/Credits"]
+margin_top = 47.0
+margin_right = 984.0
+margin_bottom = 136.0
+
+[node name="FileName" type="Label" parent="UI/VSplitContainer/HBox/Credits/HBox2"]
+margin_right = 792.0
+margin_bottom = 89.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+text = "Titel"
+autowrap = true
+
+[node name="FileName2" type="Label" parent="UI/VSplitContainer/HBox/Credits/HBox2"]
+visible = false
+margin_left = 446.0
+margin_top = -47.0
+margin_right = 861.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+text = "Titel"
+autowrap = true
+
+[node name="Hinweis" type="Label" parent="UI/VSplitContainer/HBox/Credits/HBox2"]
+margin_left = 796.0
+margin_right = 984.0
+margin_bottom = 89.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+text = "(Ausschnitt)
+"
+align = 2
+
+[node name="Hinweis2" type="Label" parent="UI/VSplitContainer/HBox/Credits/HBox2"]
+visible = false
+margin_left = 797.0
+margin_right = 984.0
+margin_bottom = 43.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+text = "(Ausschnitt)
+"
+align = 2
+
+[node name="ButtonBack" type="Button" parent="UI/VSplitContainer/HBox"]
+margin_left = 1016.0
+margin_right = 1080.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 10 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = SubResource( 12 )
+custom_styles/disabled = SubResource( 13 )
+custom_styles/normal = SubResource( 14 )
+shortcut_in_tooltip = false
+icon = ExtResource( 2 )
+align = 2
+
+[node name="VBox" type="VBoxContainer" parent="UI/VSplitContainer"]
+margin_top = 1142.0
+margin_right = 1080.0
+margin_bottom = 1920.0
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/VSplitContainer/VBox"]
+margin_right = 1080.0
+margin_bottom = 560.0
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="UI/VSplitContainer/VBox/MarginContainer"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+material = SubResource( 15 )
+margin_right = 1080.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 1080, 560 )
+size_flags_vertical = 3
+texture = ExtResource( 5 )
+expand = true
+
+[node name="VBoxGenTex" type="VBoxContainer" parent="UI/VSplitContainer/VBox/MarginContainer"]
+margin_right = 1080.0
+margin_bottom = 560.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SteckbriefWindow" type="VBoxContainer" parent="UI/VSplitContainer/VBox/MarginContainer/VBoxGenTex"]
+visible = false
+margin_right = 1080.0
+margin_bottom = 663.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/VSplitContainer/VBox/MarginContainer/VBoxGenTex/SteckbriefWindow"]
+margin_right = 1080.0
+margin_bottom = 91.0
+custom_colors/font_color = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 29 )
+custom_styles/normal = ExtResource( 6 )
+text = "Steckbrief"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/VSplitContainer/VBox/MarginContainer/VBoxGenTex/SteckbriefWindow"]
+visible = false
+margin_top = 95.0
+margin_right = 1080.0
+margin_bottom = 119.0
+custom_constants/separation = 24
+custom_styles/separator = SubResource( 24 )
+
+[node name="SteckbriefScroll" type="ScrollContainer" parent="UI/VSplitContainer/VBox/MarginContainer/VBoxGenTex/SteckbriefWindow"]
+margin_top = 123.0
+margin_right = 1080.0
+margin_bottom = 663.0
+rect_min_size = Vector2( 0, 540 )
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="SteckbriefCont" type="VBoxContainer" parent="UI/VSplitContainer/VBox/MarginContainer/VBoxGenTex/SteckbriefWindow/SteckbriefScroll"]
+margin_left = 15.0
+margin_right = 1065.0
+rect_min_size = Vector2( 1050, 0 )
+size_flags_horizontal = 6
+
+[node name="TextBox" type="RichTextLabel" parent="UI/VSplitContainer/VBox/MarginContainer/VBoxGenTex"]
+margin_left = 32.0
+margin_right = 1080.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 1048, 0 )
+size_flags_horizontal = 12
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 9 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EB" type="ScrollContainer" parent="UI/VSplitContainer/VBox"]
+margin_top = 564.0
+margin_right = 1080.0
+margin_bottom = 619.0
+custom_styles/bg = ExtResource( 20 )
+scroll_vertical_enabled = false
+
+[node name="CreatorNames" type="Label" parent="UI/VSplitContainer/VBox/EB"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 1074.0
+margin_bottom = 49.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 10 )
+text = "Erstellt von ?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/VSplitContainer/VBox"]
+margin_top = 623.0
+margin_right = 1080.0
+margin_bottom = 678.0
+
+[node name="SortName" type="Label" parent="UI/VSplitContainer/VBox/HBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 538.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.513726, 1, 0.67451, 1 )
+custom_fonts/font = ExtResource( 10 )
+custom_styles/normal = ExtResource( 20 )
+text = "   Alphabet"
+align = 2
+clip_text = true
+
+[node name="SortSymbol" type="TextureRect" parent="UI/VSplitContainer/VBox/HBoxContainer/SortName"]
+margin_right = 48.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 48, 48 )
+texture = ExtResource( 30 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FilterName" type="Label" parent="UI/VSplitContainer/VBox/HBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+margin_left = 542.0
+margin_right = 1080.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.513726, 1, 0.67451, 1 )
+custom_fonts/font = ExtResource( 10 )
+custom_styles/normal = ExtResource( 20 )
+text = "   Kein Filter"
+align = 2
+
+[node name="FilterSymbol" type="TextureRect" parent="UI/VSplitContainer/VBox/HBoxContainer/FilterName"]
+margin_right = 48.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 48, 48 )
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxControl" type="HBoxContainer" parent="UI/VSplitContainer/VBox"]
+margin_top = 682.0
+margin_right = 1080.0
+margin_bottom = 778.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SteckbriefButton" type="CheckButton" parent="UI/VSplitContainer/VBox/HBoxControl"]
+margin_right = 96.0
+margin_bottom = 96.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_icons/off = ExtResource( 31 )
+custom_icons/on_disabled = ExtResource( 26 )
+custom_icons/on = ExtResource( 26 )
+custom_icons/off_disabled = ExtResource( 31 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/hover_pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+shortcut_in_tooltip = false
+
+[node name="FehlerHinweisButton" type="Button" parent="UI/VSplitContainer/VBox/HBoxControl"]
+margin_left = 100.0
+margin_right = 196.0
+margin_bottom = 96.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+toggle_mode = true
+shortcut_in_tooltip = false
+icon = ExtResource( 32 )
+
+[node name="AllAnimalMenu" type="Button" parent="UI/VSplitContainer/VBox/HBoxControl"]
+margin_left = 200.0
+margin_right = 880.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+toggle_mode = true
+shortcut_in_tooltip = false
+text = "Wähle ein Tier"
+
+[node name="SortButton" type="Button" parent="UI/VSplitContainer/VBox/HBoxControl"]
+margin_left = 884.0
+margin_right = 980.0
+margin_bottom = 96.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 9 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+shortcut_in_tooltip = false
+icon = ExtResource( 30 )
+
+[node name="PopupMenuSort" type="PopupMenu" parent="UI/VSplitContainer/VBox/HBoxControl/SortButton"]
+margin_right = 203.0
+margin_bottom = 98.0
+custom_colors/font_color_hover = Color( 1, 0.537255, 0.305882, 1 )
+custom_styles/labeled_separator_left = ExtResource( 20 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/labeled_separator_right = ExtResource( 20 )
+custom_styles/panel_disabled = ExtResource( 20 )
+custom_styles/panel = ExtResource( 20 )
+custom_styles/separator = ExtResource( 20 )
+items = [ "Name", null, 2, true, false, 0, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FilterButton" type="Button" parent="UI/VSplitContainer/VBox/HBoxControl"]
+margin_left = 984.0
+margin_right = 1080.0
+margin_bottom = 96.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 9 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+toggle_mode = true
+shortcut_in_tooltip = false
+icon = ExtResource( 8 )
+
+[node name="PopupMenuItemZahl" type="HBoxContainer" parent="UI/VSplitContainer/VBox/HBoxControl/FilterButton"]
+visible = false
+margin_left = -980.0
+margin_top = -1500.0
+margin_right = 70.0
+margin_bottom = -1388.0
+rect_min_size = Vector2( 1080, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/VSplitContainer/VBox/HBoxControl/FilterButton/PopupMenuItemZahl"]
+margin_top = 17.0
+margin_right = 425.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+custom_styles/normal = ExtResource( 6 )
+text = "Eigenschaft"
+align = 2
+autowrap = true
+
+[node name="Operator" type="OptionButton" parent="UI/VSplitContainer/VBox/HBoxControl/FilterButton/PopupMenuItemZahl"]
+margin_left = 429.0
+margin_top = 8.0
+margin_right = 543.0
+margin_bottom = 104.0
+size_flags_vertical = 4
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 10 )
+custom_icons/arrow = ExtResource( 24 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+shortcut_in_tooltip = false
+action_mode = 1
+icon = ExtResource( 22 )
+clip_text = true
+items = [ "", ExtResource( 23 ), false, 0, null, "", ExtResource( 21 ), false, 1, null, "", ExtResource( 22 ), false, 2, null, "", ExtResource( 25 ), false, 3, null ]
+selected = 2
+
+[node name="PopupLineEdit" type="LineEdit" parent="UI/VSplitContainer/VBox/HBoxControl/FilterButton/PopupMenuItemZahl"]
+margin_left = 547.0
+margin_right = 972.0
+margin_bottom = 112.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+custom_icons/clear = ExtResource( 12 )
+custom_styles/read_only = ExtResource( 6 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+max_length = 64
+context_menu_enabled = false
+clear_button_enabled = true
+placeholder_text = "Zahl zb. 1.2"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SearchButton" type="Button" parent="UI/VSplitContainer/VBox/HBoxControl/FilterButton/PopupMenuItemZahl"]
+margin_left = 976.0
+margin_right = 1080.0
+margin_bottom = 112.0
+size_flags_vertical = 4
+custom_styles/hover = ExtResource( 27 )
+custom_styles/pressed = ExtResource( 27 )
+custom_styles/focus = ExtResource( 27 )
+custom_styles/disabled = ExtResource( 27 )
+custom_styles/normal = ExtResource( 27 )
+icon = ExtResource( 28 )
+
+[node name="TierScroll" type="ScrollContainer" parent="UI"]
+visible = false
+margin_top = 99.0
+margin_right = 1080.0
+margin_bottom = 399.0
+rect_min_size = Vector2( 1080, 1719 )
+custom_styles/bg = SubResource( 23 )
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tierliste" type="VBoxContainer" parent="UI/TierScroll"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 1058.0
+margin_bottom = 1711.0
+rect_min_size = Vector2( 1050, 0 )
+size_flags_vertical = 3
+custom_constants/separation = 32
+
+[node name="FilterScroll" type="ScrollContainer" parent="UI"]
+visible = false
+margin_top = 99.0
+margin_right = 1080.0
+margin_bottom = 399.0
+rect_min_size = Vector2( 1080, 1719 )
+custom_styles/bg = SubResource( 23 )
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Filterliste" type="VBoxContainer" parent="UI/FilterScroll"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 1058.0
+margin_bottom = 1711.0
+rect_min_size = Vector2( 1050, 0 )
+size_flags_vertical = 3
+custom_constants/separation = 32
+
+[node name="FilterScroll2" type="ScrollContainer" parent="UI"]
+visible = false
+margin_top = 99.0
+margin_right = 1080.0
+margin_bottom = 399.0
+rect_min_size = Vector2( 1080, 1719 )
+custom_styles/bg = SubResource( 23 )
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Filterliste2" type="VBoxContainer" parent="UI/FilterScroll2"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 1058.0
+margin_bottom = 1711.0
+rect_min_size = Vector2( 1050, 0 )
+size_flags_vertical = 3
+custom_constants/separation = 32
+
+[node name="FehlerHinweis" type="ScrollContainer" parent="UI"]
+visible = false
+margin_top = 99.0
+margin_right = 1080.0
+margin_bottom = 399.0
+rect_min_size = Vector2( 1080, 1719 )
+custom_styles/bg = SubResource( 23 )
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box" type="VBoxContainer" parent="UI/FehlerHinweis"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 1058.0
+margin_bottom = 1711.0
+rect_min_size = Vector2( 1050, 0 )
+size_flags_vertical = 3
+custom_constants/separation = 32
+
+[node name="Label" type="Label" parent="UI/FehlerHinweis/Box"]
+margin_right = 1050.0
+margin_bottom = 78.0
+custom_colors/font_color = Color( 1, 0.537255, 0.305882, 1 )
+text = "Verbesserungshinweis für Admins"
+align = 1
+
+[node name="HSeparator2" type="HSeparator" parent="UI/FehlerHinweis/Box"]
+margin_top = 110.0
+margin_right = 1050.0
+margin_bottom = 126.0
+custom_constants/separation = 16
+custom_styles/separator = SubResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HinweisText" type="TextEdit" parent="UI/FehlerHinweis/Box"]
+margin_top = 158.0
+margin_right = 1050.0
+margin_bottom = 1543.0
+rect_min_size = Vector2( 0, 1200 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/completion_scroll_width = 300
+custom_fonts/font = ExtResource( 9 )
+custom_styles/read_only = ExtResource( 6 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+custom_styles/completion = ExtResource( 6 )
+override_selected_font_color = true
+smooth_scrolling = true
+wrap_enabled = true
+minimap_width = 60
+caret_blink = true
+caret_moving_by_right_click = false
+
+[node name="HBox" type="HBoxContainer" parent="UI/FehlerHinweis/Box"]
+margin_left = 169.0
+margin_top = 1575.0
+margin_right = 881.0
+margin_bottom = 1671.0
+size_flags_horizontal = 6
+custom_constants/separation = 64
+
+[node name="SendButton" type="Button" parent="UI/FehlerHinweis/Box/HBox"]
+margin_right = 348.0
+margin_bottom = 96.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+shortcut_in_tooltip = false
+text = "Abschicken"
+icon = ExtResource( 32 )
+
+[node name="ButtonKeyboard" type="CheckButton" parent="UI/FehlerHinweis/Box/HBox"]
+margin_left = 412.0
+margin_right = 712.0
+margin_bottom = 96.0
+custom_constants/check_vadjust = -8
+custom_constants/hseparation = 8
+custom_fonts/font = ExtResource( 1 )
+custom_icons/off = ExtResource( 33 )
+custom_icons/on_disabled = ExtResource( 34 )
+custom_icons/on = ExtResource( 34 )
+custom_icons/off_disabled = ExtResource( 33 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/hover_pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+shortcut_in_tooltip = false
+pressed = true
+text = "Keyboard"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="UI/FehlerHinweis/Box"]
+margin_top = 1703.0
+margin_right = 1050.0
+margin_bottom = 1703.0
+custom_constants/separation = 0
+custom_styles/separator = SubResource( 25 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="animation_finished" from="Foto1/FotoAnim1" to="." method="_on_FotoAnim1_animation_finished"]
+[connection signal="animation_finished" from="Foto2/FotoAnim2" to="." method="_on_FotoAnim2_animation_finished"]
+[connection signal="pressed" from="UI/VSplitContainer/HBox/Credits/HBox/Licence" to="." method="_on_Licence_pressed"]
+[connection signal="pressed" from="UI/VSplitContainer/HBox/Credits/HBox/Licence2" to="." method="_on_Licence2_pressed"]
+[connection signal="pressed" from="UI/VSplitContainer/HBox/Credits/HBox/LinkButtonFoto" to="." method="_on_LinkButton_pressed"]
+[connection signal="pressed" from="UI/VSplitContainer/HBox/ButtonBack" to="." method="_on_ButtonBack_pressed"]
+[connection signal="gui_input" from="UI/VSplitContainer/VBox/MarginContainer/VBoxGenTex/TextBox" to="." method="_on_TextBox_gui_input"]
+[connection signal="meta_clicked" from="UI/VSplitContainer/VBox/MarginContainer/VBoxGenTex/TextBox" to="." method="_on_TextBox_meta_clicked"]
+[connection signal="toggled" from="UI/VSplitContainer/VBox/HBoxControl/SteckbriefButton" to="." method="_on_SteckbriefButton_toggled"]
+[connection signal="toggled" from="UI/VSplitContainer/VBox/HBoxControl/FehlerHinweisButton" to="." method="_on_FehlerHinweisButton_toggled"]
+[connection signal="toggled" from="UI/VSplitContainer/VBox/HBoxControl/AllAnimalMenu" to="." method="_on_AllAnimalMenu_toggled"]
+[connection signal="pressed" from="UI/VSplitContainer/VBox/HBoxControl/SortButton" to="." method="_on_SortButton_pressed"]
+[connection signal="index_pressed" from="UI/VSplitContainer/VBox/HBoxControl/SortButton/PopupMenuSort" to="." method="_on_PopupMenuSort_index_pressed"]
+[connection signal="toggled" from="UI/VSplitContainer/VBox/HBoxControl/FilterButton" to="." method="_on_FilterButton_toggled"]
+[connection signal="text_entered" from="UI/VSplitContainer/VBox/HBoxControl/FilterButton/PopupMenuItemZahl/PopupLineEdit" to="." method="_on_PopupLineEdit_text_entered"]
+[connection signal="pressed" from="UI/VSplitContainer/VBox/HBoxControl/FilterButton/PopupMenuItemZahl/SearchButton" to="." method="_on_SearchButton_pressed"]
+[connection signal="text_changed" from="UI/FehlerHinweis/Box/HinweisText" to="." method="_on_HinweisText_text_changed"]
+[connection signal="pressed" from="UI/FehlerHinweis/Box/HBox/SendButton" to="." method="_on_SendButton_pressed"]
+[connection signal="toggled" from="UI/FehlerHinweis/Box/HBox/ButtonKeyboard" to="." method="_on_ButtonKeyboard_toggled"]

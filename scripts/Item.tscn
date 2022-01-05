@@ -1,0 +1,108 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/Item.gd" type="Script" id=1]
+[ext_resource path="res://tres/ButtonMenu.tres" type="StyleBox" id=2]
+[ext_resource path="res://font/FontMedium.tres" type="DynamicFont" id=3]
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=4]
+[ext_resource path="res://img/icon_remove.png" type="Texture" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 0.784314 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+corner_radius_top_left = 64
+corner_detail = 1
+
+[node name="Item" type="VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1050, 0 )
+size_flags_horizontal = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_right = 1050.0
+margin_bottom = 32.0
+custom_constants/separation = 32
+custom_styles/separator = SubResource( 1 )
+
+[node name="Select" type="Button" parent="."]
+margin_top = 36.0
+margin_right = 1050.0
+margin_bottom = 130.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+toggle_mode = true
+shortcut_in_tooltip = false
+text = "---"
+clip_text = true
+
+[node name="HBoxNew" type="HBoxContainer" parent="."]
+visible = false
+margin_top = 132.0
+margin_right = 1080.0
+margin_bottom = 208.0
+
+[node name="Label" type="Label" parent="HBoxNew"]
+margin_right = 310.0
+margin_bottom = 76.0
+custom_styles/normal = ExtResource( 4 )
+text = "Eigenschaft:"
+
+[node name="NewRow" type="LineEdit" parent="HBoxNew"]
+margin_left = 314.0
+margin_right = 1080.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_icons/clear = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+align = 1
+max_length = 32
+clear_button_enabled = true
+placeholder_text = "Name"
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="CheckTimer" type="Timer" parent="HBoxNew/NewRow"]
+one_shot = true
+
+[node name="ItemScroll" type="ScrollContainer" parent="."]
+visible = false
+margin_top = 134.0
+margin_right = 1050.0
+margin_bottom = 934.0
+rect_min_size = Vector2( 1050, 800 )
+custom_styles/bg = SubResource( 2 )
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Itemliste" type="VBoxContainer" parent="ItemScroll"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 1008.0
+margin_bottom = 792.0
+rect_min_size = Vector2( 1000, 0 )
+size_flags_vertical = 3
+custom_constants/separation = 32
+
+[connection signal="toggled" from="Select" to="." method="_on_Select_toggled"]
+[connection signal="text_changed" from="HBoxNew/NewRow" to="." method="_on_NewRow_text_changed"]
+[connection signal="timeout" from="HBoxNew/NewRow/CheckTimer" to="." method="_on_CheckTimer_timeout"]

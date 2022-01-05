@@ -1,0 +1,1129 @@
+[gd_scene load_steps=41 format=2]
+
+[ext_resource path="res://font/FontMedium.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scripts/Add.gd" type="Script" id=2]
+[ext_resource path="res://img/icon_back.png" type="Texture" id=3]
+[ext_resource path="res://font/FontSmall.tres" type="DynamicFont" id=4]
+[ext_resource path="res://img/frame.png" type="Texture" id=5]
+[ext_resource path="res://scripts/AddPage1.gd" type="Script" id=6]
+[ext_resource path="res://img/icon_search.png" type="Texture" id=7]
+[ext_resource path="res://scripts/AddPage2.gd" type="Script" id=8]
+[ext_resource path="res://font/FontBig.tres" type="DynamicFont" id=9]
+[ext_resource path="res://img/icon_context.png" type="Texture" id=10]
+[ext_resource path="res://scripts/AddPage3.gd" type="Script" id=11]
+[ext_resource path="res://img/icon_drag_02.png" type="Texture" id=12]
+[ext_resource path="res://img/icon_drag_03.png" type="Texture" id=13]
+[ext_resource path="res://scripts/AddPage4.gd" type="Script" id=14]
+[ext_resource path="res://img/icon_drag_04.png" type="Texture" id=15]
+[ext_resource path="res://img/icon_drag_01.png" type="Texture" id=16]
+[ext_resource path="res://img/icon_drag_05.png" type="Texture" id=17]
+[ext_resource path="res://img/frame2.png" type="Texture" id=18]
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=19]
+[ext_resource path="res://tres/ButtonMenu.tres" type="StyleBox" id=20]
+[ext_resource path="res://img/frame_back.png" type="Texture" id=21]
+[ext_resource path="res://font/FontMedSmall.tres" type="DynamicFont" id=22]
+[ext_resource path="res://img/icon_flip.png" type="Texture" id=23]
+[ext_resource path="res://img/icon_add_text.png" type="Texture" id=24]
+[ext_resource path="res://img/icon_remove.png" type="Texture" id=25]
+[ext_resource path="res://scripts/TextBox.tscn" type="PackedScene" id=26]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="CanvasItemMaterial" id=8]
+blend_mode = 2
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 2
+
+[sub_resource type="AnimatedTexture" id=7]
+flags = 4
+frames = 10
+fps = 6.0
+frame_0/texture = ExtResource( 16 )
+frame_1/texture = ExtResource( 12 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 13 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 15 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 17 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 17 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 15 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 13 )
+frame_7/delay_sec = 0.0
+frame_8/texture = ExtResource( 12 )
+frame_8/delay_sec = 0.0
+frame_9/texture = ExtResource( 16 )
+frame_9/delay_sec = 0.0
+
+[sub_resource type="CanvasItemMaterial" id=11]
+blend_mode = 2
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0, 0, 0, 0.784314 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+corner_radius_top_left = 64
+corner_detail = 1
+
+[sub_resource type="GDScript" id=14]
+script/source = "extends AcceptDialog
+
+onready var timer =$Timer
+
+func _ready():
+	set_process(false)
+
+func _process(_delta):
+	set_text(\"\\nTier jetzt erstellen?\\n\\nDu kannst danach keine Einstellungen mehr ändern!\\n\\n\"+str(ceil(timer.get_time_left())))
+
+func _on_Confirmation_visibility_changed():
+	if is_visible():
+		set_process(true)
+		timer.start(3)
+
+func _on_Timer_timeout():
+	set_visible(false)
+	set_process(false)
+
+
+"
+
+[node name="AddBase" type="Control"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Add" type="VBoxContainer" parent="."]
+rect_min_size = Vector2( 1080, 1920 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeadBox" type="HBoxContainer" parent="Add"]
+margin_right = 1080.0
+margin_bottom = 127.0
+
+[node name="ButtonOpenContext" type="Button" parent="Add/HeadBox"]
+margin_right = 80.0
+margin_bottom = 127.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+shortcut_in_tooltip = false
+icon = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="Add/HeadBox"]
+margin_left = 84.0
+margin_right = 1012.0
+margin_bottom = 127.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "Neuer Eintrag"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonBackAdd" type="Button" parent="Add/HeadBox"]
+margin_left = 1016.0
+margin_right = 1080.0
+margin_bottom = 127.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+shortcut_in_tooltip = false
+icon = ExtResource( 3 )
+
+[node name="HSeparator" type="HSeparator" parent="Add"]
+margin_top = 131.0
+margin_right = 1080.0
+margin_bottom = 155.0
+custom_constants/separation = 24
+custom_styles/separator = SubResource( 9 )
+
+[node name="Back" type="Sprite" parent="Add/HSeparator"]
+visible = false
+material = SubResource( 8 )
+position = Vector2( 0, -140 )
+scale = Vector2( 1, 3.55556 )
+texture = ExtResource( 18 )
+centered = false
+
+[node name="Page1" type="VBoxContainer" parent="Add"]
+margin_top = 159.0
+margin_right = 1080.0
+margin_bottom = 1779.0
+rect_min_size = Vector2( 0, 1620 )
+custom_constants/separation = 16
+script = ExtResource( 6 )
+
+[node name="HBoxName" type="HBoxContainer" parent="Add/Page1"]
+margin_right = 1080.0
+margin_bottom = 94.0
+
+[node name="ButtonEinfName" type="Button" parent="Add/Page1/HBoxName"]
+margin_right = 128.0
+margin_bottom = 94.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+text = "Einf."
+
+[node name="Name" type="LineEdit" parent="Add/Page1/HBoxName"]
+margin_left = 132.0
+margin_right = 1080.0
+margin_bottom = 94.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+custom_icons/clear = ExtResource( 25 )
+custom_styles/focus = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+align = 1
+max_length = 48
+clear_button_enabled = true
+placeholder_text = "Name"
+caret_blink = true
+
+[node name="HBoxAuswahl" type="HBoxContainer" parent="Add/Page1"]
+visible = false
+margin_right = 1080.0
+margin_bottom = 92.0
+
+[node name="ButtonAuswahl" type="Button" parent="Add/Page1/HBoxAuswahl"]
+margin_right = 1080.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+toggle_mode = true
+shortcut_in_tooltip = false
+text = "Tier auswählen..."
+
+[node name="HBoxText" type="HBoxContainer" parent="Add/Page1"]
+margin_top = 110.0
+margin_right = 1080.0
+margin_bottom = 206.0
+custom_constants/separation = 32
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonAuswahlTextBox" type="OptionButton" parent="Add/Page1/HBoxText"]
+margin_right = 932.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+action_mode = 1
+text = "TextBox 1"
+align = 1
+items = [ "TextBox 1", null, false, 0, null ]
+selected = 0
+
+[node name="ButtonAddTextBox" type="Button" parent="Add/Page1/HBoxText"]
+margin_left = 964.0
+margin_right = 1080.0
+margin_bottom = 96.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = " "
+icon = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextBoxContainer" type="Control" parent="Add/Page1"]
+margin_top = 222.0
+margin_right = 1080.0
+margin_bottom = 222.0
+
+[node name="TextBox" parent="Add/Page1/TextBoxContainer" instance=ExtResource( 26 )]
+
+[node name="Page2" type="VBoxContainer" parent="Add"]
+visible = false
+margin_top = 159.0
+margin_right = 1080.0
+margin_bottom = 1779.0
+rect_min_size = Vector2( 0, 1620 )
+custom_constants/separation = 14
+script = ExtResource( 8 )
+
+[node name="HBoxFurlM" type="HBoxContainer" parent="Add/Page2"]
+margin_right = 1080.0
+margin_bottom = 79.0
+
+[node name="ButtonEinfFurlM" type="Button" parent="Add/Page2/HBoxFurlM"]
+margin_right = 109.0
+margin_bottom = 79.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+text = "Einf."
+
+[node name="FurlM" type="LineEdit" parent="Add/Page2/HBoxFurlM"]
+margin_left = 113.0
+margin_right = 1080.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_icons/clear = ExtResource( 25 )
+custom_styles/focus = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+clear_button_enabled = true
+placeholder_text = "Foto A Link"
+
+[node name="HBoxFPurlM" type="HBoxContainer" parent="Add/Page2"]
+margin_top = 93.0
+margin_right = 1080.0
+margin_bottom = 172.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonEinfFPurlM" type="Button" parent="Add/Page2/HBoxFPurlM"]
+margin_right = 109.0
+margin_bottom = 79.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+text = "Einf."
+
+[node name="FPurlM" type="LineEdit" parent="Add/Page2/HBoxFPurlM"]
+margin_left = 113.0
+margin_right = 1080.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_icons/clear = ExtResource( 25 )
+custom_styles/focus = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+clear_button_enabled = true
+placeholder_text = "Foto Seiten Link"
+
+[node name="HBoxFFnameM" type="HBoxContainer" parent="Add/Page2"]
+margin_top = 186.0
+margin_right = 1080.0
+margin_bottom = 265.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonEinfFFnameM" type="Button" parent="Add/Page2/HBoxFFnameM"]
+margin_right = 109.0
+margin_bottom = 79.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+text = "Einf."
+
+[node name="FFnameM" type="LineEdit" parent="Add/Page2/HBoxFFnameM"]
+margin_left = 113.0
+margin_right = 1080.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_icons/clear = ExtResource( 25 )
+custom_styles/focus = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+clear_button_enabled = true
+placeholder_text = "Titel (bzw.Filename)"
+
+[node name="HBoxFurheberM" type="HBoxContainer" parent="Add/Page2"]
+margin_top = 279.0
+margin_right = 1080.0
+margin_bottom = 358.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonEinfFurheberM" type="Button" parent="Add/Page2/HBoxFurheberM"]
+margin_right = 109.0
+margin_bottom = 79.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+text = "Einf."
+
+[node name="FurheberM" type="LineEdit" parent="Add/Page2/HBoxFurheberM"]
+margin_left = 113.0
+margin_right = 1080.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_icons/clear = ExtResource( 25 )
+custom_styles/focus = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+clear_button_enabled = true
+placeholder_text = "Foto Urheber"
+
+[node name="FlizenzM" type="OptionButton" parent="Add/Page2"]
+margin_top = 372.0
+margin_right = 1080.0
+margin_bottom = 451.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+action_mode = 1
+text = "--> Lizenz"
+items = [ "--> Lizenz", null, false, 0, null ]
+selected = 0
+
+[node name="HBoxControl" type="HBoxContainer" parent="Add/Page2"]
+margin_top = 465.0
+margin_right = 1080.0
+margin_bottom = 524.0
+
+[node name="ButtonZoomOut1" type="Button" parent="Add/Page2/HBoxControl"]
+margin_left = 35.0
+margin_right = 155.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = "-"
+
+[node name="ButtonZoomOut1H" type="Button" parent="Add/Page2/HBoxControl"]
+margin_left = 214.0
+margin_right = 364.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = "--"
+
+[node name="DefaultZoom1" type="Button" parent="Add/Page2/HBoxControl"]
+margin_left = 388.0
+margin_right = 528.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 140, 0 )
+size_flags_horizontal = 5
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = "1:1"
+icon = ExtResource( 7 )
+clip_text = true
+expand_icon = true
+
+[node name="VSeparator" type="VSeparator" parent="Add/Page2/HBoxControl"]
+margin_left = 532.0
+margin_right = 548.0
+margin_bottom = 59.0
+custom_constants/separation = 16
+custom_styles/separator = SubResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonFlip1" type="Button" parent="Add/Page2/HBoxControl"]
+margin_left = 552.0
+margin_right = 692.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 140, 0 )
+size_flags_horizontal = 5
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+toggle_mode = true
+shortcut_in_tooltip = false
+text = "flip"
+icon = ExtResource( 23 )
+clip_text = true
+expand_icon = true
+
+[node name="ButtonZoomIn1H" type="Button" parent="Add/Page2/HBoxControl"]
+margin_left = 716.0
+margin_right = 866.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = "++"
+
+[node name="ButtonZoomIn1" type="Button" parent="Add/Page2/HBoxControl"]
+margin_left = 925.0
+margin_right = 1045.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = "+"
+
+[node name="Rahmen" type="TextureRect" parent="Add/Page2"]
+material = SubResource( 6 )
+margin_top = 538.0
+margin_right = 1080.0
+margin_bottom = 1618.0
+rect_min_size = Vector2( 1080, 1080 )
+texture = ExtResource( 5 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hinweis" type="Label" parent="Add/Page2/Rahmen"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 1040.0
+margin_bottom = 1040.0
+rect_min_size = Vector2( 1000, 1000 )
+custom_fonts/font = ExtResource( 22 )
+text = "Auf dem Foto dürfen keine Personen erkennbar sein!"
+valign = 2
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IconDrag" type="Sprite" parent="Add/Page2/Rahmen"]
+position = Vector2( 540, 540 )
+texture = SubResource( 7 )
+
+[node name="Back" type="Sprite" parent="Add/Page2/Rahmen/IconDrag"]
+material = SubResource( 11 )
+z_index = -1
+texture = ExtResource( 21 )
+
+[node name="Foto1" type="Sprite" parent="Add/Page2/Rahmen"]
+z_index = -1
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1080, 1080 )
+region_filter_clip = true
+
+[node name="Page3" type="VBoxContainer" parent="Add"]
+visible = false
+margin_top = 159.0
+margin_right = 1080.0
+margin_bottom = 1779.0
+rect_min_size = Vector2( 0, 1620 )
+custom_constants/separation = 14
+script = ExtResource( 11 )
+
+[node name="HBoxFurlW" type="HBoxContainer" parent="Add/Page3"]
+margin_right = 1080.0
+margin_bottom = 79.0
+
+[node name="ButtonEinfFurlW" type="Button" parent="Add/Page3/HBoxFurlW"]
+margin_right = 109.0
+margin_bottom = 79.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+text = "Einf."
+
+[node name="FurlW" type="LineEdit" parent="Add/Page3/HBoxFurlW"]
+margin_left = 113.0
+margin_right = 1080.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_icons/clear = ExtResource( 25 )
+custom_styles/focus = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+clear_button_enabled = true
+placeholder_text = "Foto B Link"
+
+[node name="HBoxFPurlW" type="HBoxContainer" parent="Add/Page3"]
+margin_top = 93.0
+margin_right = 1080.0
+margin_bottom = 172.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonEinfFPurlW" type="Button" parent="Add/Page3/HBoxFPurlW"]
+margin_right = 109.0
+margin_bottom = 79.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+text = "Einf."
+
+[node name="FPurlW" type="LineEdit" parent="Add/Page3/HBoxFPurlW"]
+margin_left = 113.0
+margin_right = 1080.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_icons/clear = ExtResource( 25 )
+custom_styles/focus = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+clear_button_enabled = true
+placeholder_text = "Foto Seiten Link"
+
+[node name="HBoxFFnameW" type="HBoxContainer" parent="Add/Page3"]
+margin_top = 186.0
+margin_right = 1080.0
+margin_bottom = 265.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonEinfFFnameW" type="Button" parent="Add/Page3/HBoxFFnameW"]
+margin_right = 109.0
+margin_bottom = 79.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+text = "Einf."
+
+[node name="FFnameW" type="LineEdit" parent="Add/Page3/HBoxFFnameW"]
+margin_left = 113.0
+margin_right = 1080.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_icons/clear = ExtResource( 25 )
+custom_styles/focus = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+clear_button_enabled = true
+placeholder_text = "Titel (bzw.Filename)"
+
+[node name="HBoxFurheberW" type="HBoxContainer" parent="Add/Page3"]
+margin_top = 279.0
+margin_right = 1080.0
+margin_bottom = 358.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonEinfFurheberW" type="Button" parent="Add/Page3/HBoxFurheberW"]
+margin_right = 109.0
+margin_bottom = 79.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+text = "Einf."
+
+[node name="FurheberW" type="LineEdit" parent="Add/Page3/HBoxFurheberW"]
+margin_left = 113.0
+margin_right = 1080.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_icons/clear = ExtResource( 25 )
+custom_styles/focus = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+clear_button_enabled = true
+placeholder_text = "Foto Urheber"
+
+[node name="FlizenzW" type="OptionButton" parent="Add/Page3"]
+margin_top = 372.0
+margin_right = 1080.0
+margin_bottom = 451.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+action_mode = 1
+text = "--> Lizenz"
+items = [ "--> Lizenz", null, false, 0, null ]
+selected = 0
+
+[node name="HBoxControl" type="HBoxContainer" parent="Add/Page3"]
+margin_top = 465.0
+margin_right = 1080.0
+margin_bottom = 524.0
+
+[node name="ButtonZoomOut2" type="Button" parent="Add/Page3/HBoxControl"]
+margin_left = 35.0
+margin_right = 155.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = "-"
+
+[node name="ButtonZoomOut2H" type="Button" parent="Add/Page3/HBoxControl"]
+margin_left = 214.0
+margin_right = 364.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = "--"
+
+[node name="DefaultZoom2" type="Button" parent="Add/Page3/HBoxControl"]
+margin_left = 388.0
+margin_right = 528.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 140, 0 )
+size_flags_horizontal = 5
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = "1:1"
+icon = ExtResource( 7 )
+clip_text = true
+expand_icon = true
+
+[node name="VSeparator" type="VSeparator" parent="Add/Page3/HBoxControl"]
+margin_left = 532.0
+margin_right = 548.0
+margin_bottom = 59.0
+custom_constants/separation = 16
+custom_styles/separator = SubResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonFlip2" type="Button" parent="Add/Page3/HBoxControl"]
+margin_left = 552.0
+margin_right = 692.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 140, 0 )
+size_flags_horizontal = 5
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+toggle_mode = true
+shortcut_in_tooltip = false
+text = "flip"
+icon = ExtResource( 23 )
+clip_text = true
+expand_icon = true
+
+[node name="ButtonZoomIn2H" type="Button" parent="Add/Page3/HBoxControl"]
+margin_left = 716.0
+margin_right = 866.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = "++"
+
+[node name="ButtonZoomIn2" type="Button" parent="Add/Page3/HBoxControl"]
+margin_left = 925.0
+margin_right = 1045.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = "+"
+
+[node name="Rahmen" type="TextureRect" parent="Add/Page3"]
+material = SubResource( 6 )
+margin_top = 538.0
+margin_right = 1080.0
+margin_bottom = 1618.0
+rect_min_size = Vector2( 1080, 1080 )
+texture = ExtResource( 5 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hinweis" type="Label" parent="Add/Page3/Rahmen"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 1040.0
+margin_bottom = 1040.0
+rect_min_size = Vector2( 1000, 1000 )
+custom_fonts/font = ExtResource( 22 )
+text = "Auf dem Foto dürfen keine Personen erkennbar sein!"
+valign = 2
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IconDrag" type="Sprite" parent="Add/Page3/Rahmen"]
+position = Vector2( 540, 540 )
+texture = SubResource( 7 )
+
+[node name="Back" type="Sprite" parent="Add/Page3/Rahmen/IconDrag"]
+material = SubResource( 11 )
+z_index = -1
+texture = ExtResource( 21 )
+
+[node name="Foto2" type="Sprite" parent="Add/Page3/Rahmen"]
+z_index = -1
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1080, 1080 )
+region_filter_clip = true
+
+[node name="Page4" type="VBoxContainer" parent="Add"]
+visible = false
+margin_top = 1783.0
+margin_right = 1080.0
+margin_bottom = 3403.0
+rect_min_size = Vector2( 1080, 1620 )
+script = ExtResource( 14 )
+
+[node name="NewItem" type="HBoxContainer" parent="Add/Page4"]
+visible = false
+margin_right = 1080.0
+margin_bottom = 79.0
+
+[node name="ItemName" type="LineEdit" parent="Add/Page4/NewItem"]
+margin_right = 590.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_icons/clear = ExtResource( 25 )
+custom_styles/focus = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+align = 1
+max_length = 30
+clear_button_enabled = true
+placeholder_text = "Neue Eigenschaft"
+caret_blink = true
+
+[node name="OptionItemTyp" type="OptionButton" parent="Add/Page4/NewItem"]
+margin_left = 594.0
+margin_right = 866.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 140, 0 )
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+action_mode = 1
+text = "Single Text"
+items = [ "Single Text", null, false, 0, null, "Zahl", null, false, 1, null, "Multi Text", null, false, 2, null ]
+selected = 0
+
+[node name="NewItemButton" type="Button" parent="Add/Page4/NewItem"]
+margin_left = 870.0
+margin_right = 1073.0
+margin_bottom = 79.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+text = "Erstellen"
+
+[node name="HSeparator" type="HSeparator" parent="Add/Page4/NewItem"]
+margin_left = 1077.0
+margin_right = 1080.0
+margin_bottom = 79.0
+custom_constants/separation = 32
+custom_styles/separator = SubResource( 9 )
+
+[node name="Scroll" type="ScrollContainer" parent="Add/Page4"]
+margin_right = 1080.0
+margin_bottom = 1620.0
+rect_min_size = Vector2( 1050, 1500 )
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="Items" type="VBoxContainer" parent="Add/Page4/Scroll"]
+margin_right = 1080.0
+margin_bottom = 1620.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 64
+
+[node name="HSeparator2" type="HSeparator" parent="Add"]
+margin_top = 1783.0
+margin_right = 1080.0
+margin_bottom = 1807.0
+custom_constants/separation = 24
+custom_styles/separator = SubResource( 10 )
+
+[node name="HBoxNavi" type="HBoxContainer" parent="Add"]
+margin_top = 1811.0
+margin_right = 1080.0
+margin_bottom = 1905.0
+
+[node name="Prev" type="Button" parent="Add/HBoxNavi"]
+margin_left = 28.0
+margin_right = 328.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+disabled = true
+shortcut_in_tooltip = false
+text = "Zurück"
+
+[node name="Min" type="Button" parent="Add/HBoxNavi"]
+margin_left = 389.0
+margin_right = 689.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = "Min"
+
+[node name="Next" type="Button" parent="Add/HBoxNavi"]
+margin_left = 751.0
+margin_right = 1051.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+shortcut_in_tooltip = false
+text = "Weiter"
+
+[node name="TierScroll" type="ScrollContainer" parent="."]
+visible = false
+margin_top = 267.0
+margin_right = 1080.0
+margin_bottom = 1847.0
+rect_min_size = Vector2( 1080, 1639 )
+custom_styles/bg = SubResource( 13 )
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tierliste" type="VBoxContainer" parent="TierScroll"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 1058.0
+margin_bottom = 1631.0
+rect_min_size = Vector2( 1050, 0 )
+size_flags_vertical = 3
+custom_constants/separation = 32
+
+[node name="Confirmation" type="AcceptDialog" parent="."]
+self_modulate = Color( 1, 0.537255, 0.305882, 1 )
+margin_left = 270.0
+margin_top = 867.0
+margin_right = 388.0
+margin_bottom = 1053.0
+rect_min_size = Vector2( 540, 400 )
+window_title = ""
+dialog_autowrap = true
+script = SubResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="Confirmation"]
+one_shot = true
+
+[connection signal="pressed" from="Add/HeadBox/ButtonOpenContext" to="." method="_on_ButtonOpenContext_pressed"]
+[connection signal="pressed" from="Add/HeadBox/ButtonBackAdd" to="." method="_on_ButtonBackAdd_pressed"]
+[connection signal="pressed" from="Add/Page1/HBoxName/ButtonEinfName" to="Add/Page1" method="_on_ButtonEinfName_pressed"]
+[connection signal="toggled" from="Add/Page1/HBoxAuswahl/ButtonAuswahl" to="." method="_on_ButtonAuswahl_toggled"]
+[connection signal="item_selected" from="Add/Page1/HBoxText/ButtonAuswahlTextBox" to="Add/Page1" method="_on_ButtonAuswahlTextBox_item_selected"]
+[connection signal="pressed" from="Add/Page1/HBoxText/ButtonAddTextBox" to="Add/Page1" method="_on_ButtonAddTextBox_pressed"]
+[connection signal="pressed" from="Add/Page2/HBoxFurlM/ButtonEinfFurlM" to="Add/Page2" method="_on_ButtonEinfFurlM_pressed"]
+[connection signal="text_entered" from="Add/Page2/HBoxFurlM/FurlM" to="Add/Page2" method="_on_FurlM_text_entered"]
+[connection signal="pressed" from="Add/Page2/HBoxFPurlM/ButtonEinfFPurlM" to="Add/Page2" method="_on_ButtonEinfFPurlM_pressed"]
+[connection signal="pressed" from="Add/Page2/HBoxFFnameM/ButtonEinfFFnameM" to="Add/Page2" method="_on_ButtonEinfFFnameM_pressed"]
+[connection signal="pressed" from="Add/Page2/HBoxFurheberM/ButtonEinfFurheberM" to="Add/Page2" method="_on_ButtonEinfFurheberM_pressed"]
+[connection signal="item_selected" from="Add/Page2/FlizenzM" to="Add/Page2" method="_on_FlizenzM_item_selected"]
+[connection signal="pressed" from="Add/Page2/HBoxControl/ButtonZoomOut1" to="." method="_on_ButtonZoomOut1_pressed"]
+[connection signal="pressed" from="Add/Page2/HBoxControl/ButtonZoomOut1H" to="." method="_on_ButtonZoomOut1H_pressed"]
+[connection signal="pressed" from="Add/Page2/HBoxControl/DefaultZoom1" to="." method="_on_DefaultZoom1_pressed"]
+[connection signal="toggled" from="Add/Page2/HBoxControl/ButtonFlip1" to="." method="_on_ButtonFlip1_toggled"]
+[connection signal="pressed" from="Add/Page2/HBoxControl/ButtonZoomIn1H" to="." method="_on_ButtonZoomIn1H_pressed"]
+[connection signal="pressed" from="Add/Page2/HBoxControl/ButtonZoomIn1" to="." method="_on_ButtonZoomIn1_pressed"]
+[connection signal="pressed" from="Add/Page3/HBoxFurlW/ButtonEinfFurlW" to="Add/Page3" method="_on_ButtonEinfFurlW_pressed"]
+[connection signal="text_entered" from="Add/Page3/HBoxFurlW/FurlW" to="Add/Page3" method="_on_FurlW_text_entered"]
+[connection signal="pressed" from="Add/Page3/HBoxFPurlW/ButtonEinfFPurlW" to="Add/Page3" method="_on_ButtonEinfFPurlW_pressed"]
+[connection signal="pressed" from="Add/Page3/HBoxFFnameW/ButtonEinfFFnameW" to="Add/Page3" method="_on_ButtonEinfFFnameW_pressed"]
+[connection signal="pressed" from="Add/Page3/HBoxFurheberW/ButtonEinfFurheberW" to="Add/Page3" method="_on_ButtonEinfFurheberW_pressed"]
+[connection signal="item_selected" from="Add/Page3/FlizenzW" to="Add/Page3" method="_on_FlizenzW_item_selected"]
+[connection signal="pressed" from="Add/Page3/HBoxControl/ButtonZoomOut2" to="." method="_on_ButtonZoomOut2_pressed"]
+[connection signal="pressed" from="Add/Page3/HBoxControl/ButtonZoomOut2H" to="." method="_on_ButtonZoomOut2H_pressed"]
+[connection signal="pressed" from="Add/Page3/HBoxControl/DefaultZoom2" to="." method="_on_DefaultZoom2_pressed"]
+[connection signal="toggled" from="Add/Page3/HBoxControl/ButtonFlip2" to="." method="_on_ButtonFlip2_toggled"]
+[connection signal="pressed" from="Add/Page3/HBoxControl/ButtonZoomIn2H" to="." method="_on_ButtonZoomIn2H_pressed"]
+[connection signal="pressed" from="Add/Page3/HBoxControl/ButtonZoomIn2" to="." method="_on_ButtonZoomIn2_pressed"]
+[connection signal="pressed" from="Add/Page4/NewItem/NewItemButton" to="." method="_on_NewItemButton_pressed"]
+[connection signal="pressed" from="Add/HBoxNavi/Prev" to="." method="_on_Prev_pressed"]
+[connection signal="pressed" from="Add/HBoxNavi/Min" to="." method="_on_Min_pressed"]
+[connection signal="pressed" from="Add/HBoxNavi/Next" to="." method="_on_Next_pressed"]
+[connection signal="confirmed" from="Confirmation" to="." method="_on_Confirmation_confirmed"]
+[connection signal="visibility_changed" from="Confirmation" to="Confirmation" method="_on_Confirmation_visibility_changed"]
+[connection signal="timeout" from="Confirmation/Timer" to="Confirmation" method="_on_Timer_timeout"]

@@ -1,0 +1,259 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://font/FontSmall.tres" type="DynamicFont" id=1]
+[ext_resource path="res://img/icon_back.png" type="Texture" id=2]
+[ext_resource path="res://font/FontBig.tres" type="DynamicFont" id=3]
+[ext_resource path="res://font/FontMedium.tres" type="DynamicFont" id=4]
+[ext_resource path="res://tres/ButtonMenu.tres" type="StyleBox" id=5]
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=6]
+[ext_resource path="res://font/FontMedSmall.tres" type="DynamicFont" id=7]
+[ext_resource path="res://img/icon_remove.png" type="Texture" id=8]
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends VBoxContainer
+
+signal back_to_menu
+
+onready var name_window = $Name
+onready var creator_button = $HBox/CreatorButton
+onready var same_user_box = $SameUserBox
+onready var same_user_line = $SameUserBox/SameUserID
+
+var entered_name = \"\"
+
+func _on_ButtonBack_pressed():
+	emit_signal(\"back_to_menu\")
+	queue_free()
+
+func _on_CreatorButton_pressed():
+	send_request(\" Creator? \")
+
+func send_request(request):
+	creator_button.set_disabled(true)
+	entered_name = name_window.get_text()
+	var my_id = OS.get_unique_id()
+	if entered_name == \"\" or not entered_name.is_valid_identifier():
+		name_window.set_self_modulate(ColorN(\"Red\"))
+		creator_button.set_disabled(false)
+		return
+	var check_users = yield(G.get_SW_data(\"status\"), \"completed\")
+	for i in check_users.size():
+		if check_users.values()[i][0] == entered_name and check_users.keys()[i] != my_id:
+			if same_user_line.get_text() != check_users.keys()[i]:
+				name_window.set_self_modulate(ColorN(\"Red\"))
+				creator_button.set_disabled(false)
+				same_user_box.set_visible(true)
+				return
+			else:
+				name_window.set_self_modulate(Color(1,1,1,1))
+		else:
+			name_window.set_self_modulate(Color(1,1,1,1))
+	var aktual_date = OS.get_date()
+	check_users[my_id] = [entered_name,check_users[my_id][1],[0],check_users[my_id][3] +request+ str(aktual_date[\"day\"])+\".\"+str(aktual_date[\"month\"])+\".\"+str(aktual_date[\"year\"])]
+	yield(SilentWolf.Players.post_player_data(\"status\",var2str(check_users)), \"sw_player_data_posted\")
+	get_node(\"/root/Base\")._show_info(\"Creator-Anfrage gestellt...\")
+	_on_ButtonBack_pressed()
+"
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[node name="BecomeCreator" type="VBoxContainer"]
+margin_right = 1080.0
+margin_bottom = 1920.0
+script = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeadBox" type="HBoxContainer" parent="."]
+margin_right = 1080.0
+margin_bottom = 127.0
+
+[node name="Label" type="Label" parent="HeadBox"]
+margin_right = 1012.0
+margin_bottom = 127.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 3 )
+text = " Werde Creator!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonBack" type="Button" parent="HeadBox"]
+margin_left = 1016.0
+margin_right = 1080.0
+margin_bottom = 127.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+shortcut_in_tooltip = false
+icon = ExtResource( 2 )
+
+[node name="HSeparator0" type="HSeparator" parent="."]
+margin_top = 131.0
+margin_right = 1080.0
+margin_bottom = 179.0
+custom_constants/separation = 48
+custom_styles/separator = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="."]
+self_modulate = Color( 0.803922, 0.803922, 0.803922, 1 )
+margin_top = 183.0
+margin_right = 1080.0
+margin_bottom = 1632.0
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 7 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[center]
+Als Creator kannst du mithelfen, das Tier Lexicon zu erweitern. Du kannst selbst ein Foto im Internet auswählen oder auch dein eigenes, wenn du es zuvor irgendwo im Internet hochlädst.
+
+Füge eine Beschreibung aus dem Internet, mit Quelle hinzu oder schreibe sie selbst.
+Zum Schluss kommen noch verschiedene Eigenschaften die man dem Tier geben kann.
+Es ist nicht schlimm wenn der Eintrag nicht vollständig ist, da er jederzeit von Admin's weiter bearbeitet werden kann.
+
+Die Admin's werfen einen Blick auf den von dir erstellten Eintrag und können ihn gegebenenfalls bearbeiten und verändern.
+
+Falls du ein Creator werden möchtest freue ich mich sehr darüber. Such dir einen Creator Namen aus.
+
+Sobald du von mir freigeschalten wurdest, siehst du im Menü einen neuen Eintrag ('Eintag erstellen') und du kannst loslegen!
+[/center]"
+text = "
+Als Creator kannst du mithelfen, das Tier Lexicon zu erweitern. Du kannst selbst ein Foto im Internet auswählen oder auch dein eigenes, wenn du es zuvor irgendwo im Internet hochlädst.
+
+Füge eine Beschreibung aus dem Internet, mit Quelle hinzu oder schreibe sie selbst.
+Zum Schluss kommen noch verschiedene Eigenschaften die man dem Tier geben kann.
+Es ist nicht schlimm wenn der Eintrag nicht vollständig ist, da er jederzeit von Admin's weiter bearbeitet werden kann.
+
+Die Admin's werfen einen Blick auf den von dir erstellten Eintrag und können ihn gegebenenfalls bearbeiten und verändern.
+
+Falls du ein Creator werden möchtest freue ich mich sehr darüber. Such dir einen Creator Namen aus.
+
+Sobald du von mir freigeschalten wurdest, siehst du im Menü einen neuen Eintrag ('Eintag erstellen') und du kannst loslegen!
+"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 1636.0
+margin_right = 1080.0
+margin_bottom = 1668.0
+custom_constants/separation = 32
+custom_styles/separator = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="LineEdit" parent="."]
+margin_top = 1672.0
+margin_right = 1080.0
+margin_bottom = 1750.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+custom_icons/clear = ExtResource( 8 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+align = 1
+max_length = 64
+clear_button_enabled = true
+placeholder_text = "Dein Creator Name"
+caret_blink = true
+
+[node name="SameUserBox" type="VBoxContainer" parent="."]
+visible = false
+margin_top = 1345.0
+margin_right = 1080.0
+margin_bottom = 1752.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InfoText" type="Label" parent="SameUserBox"]
+margin_right = 1080.0
+margin_bottom = 327.0
+custom_fonts/font = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
+text = "Dieser Name ist bereits vergeben!
+Trage die USER-ID von deinem anderen Gerät ein um diesen Namen auch hier zu benützen. Die USER-ID findest du in den Einstellungen des zweiten Gerätes."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SameUserID" type="LineEdit" parent="SameUserBox"]
+margin_top = 331.0
+margin_right = 1080.0
+margin_bottom = 407.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+custom_icons/clear = ExtResource( 8 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+align = 1
+max_length = 64
+clear_button_enabled = true
+placeholder_text = "User ID"
+caret_blink = true
+
+[node name="HSeparator1" type="HSeparator" parent="."]
+margin_top = 1754.0
+margin_right = 1080.0
+margin_bottom = 1786.0
+custom_constants/separation = 32
+custom_styles/separator = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="."]
+margin_left = 314.0
+margin_top = 1790.0
+margin_right = 766.0
+margin_bottom = 1884.0
+size_flags_horizontal = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreatorButton" type="Button" parent="HBox"]
+margin_right = 452.0
+margin_bottom = 94.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 5 )
+custom_styles/normal = ExtResource( 5 )
+shortcut_in_tooltip = false
+text = "Creator werden!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator3" type="HSeparator" parent="."]
+margin_top = 1888.0
+margin_right = 1080.0
+margin_bottom = 1920.0
+custom_constants/separation = 32
+custom_styles/separator = SubResource( 8 )
+
+[connection signal="pressed" from="HeadBox/ButtonBack" to="." method="_on_ButtonBack_pressed"]
+[connection signal="pressed" from="HBox/CreatorButton" to="." method="_on_CreatorButton_pressed"]

@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=1]
+[ext_resource path="res://font/FontMedSmall.tres" type="DynamicFont" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends VBoxContainer
+
+onready var my_name = $Box/ItemName
+onready var my_text =$Box/ItemText
+
+var my_data
+
+func _ready():
+	my_name.set_text(my_data[0])
+	my_text.set_text(my_data[1])
+		
+
+func _set_data(steck_data):
+	my_data = steck_data
+"
+
+[sub_resource type="StyleBoxLine" id=2]
+color = Color( 1, 0.537255, 0.305882, 0.478431 )
+grow_begin = -32.0
+grow_end = -32.0
+thickness = 4
+
+[node name="SteckbriefEintrag" type="VBoxContainer"]
+margin_right = 1050.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 1050, 0 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box" type="HBoxContainer" parent="."]
+margin_right = 1050.0
+margin_bottom = 63.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemName" type="Label" parent="Box"]
+margin_right = 523.0
+margin_bottom = 63.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.780392, 0.780392, 0.780392, 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 1 )
+text = "Test_Item"
+align = 1
+autowrap = true
+
+[node name="ItemText" type="Label" parent="Box"]
+margin_left = 527.0
+margin_right = 1050.0
+margin_bottom = 63.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.513726, 1, 0.67451, 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 1 )
+text = "Test_Wert"
+align = 1
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 67.0
+margin_right = 1050.0
+margin_bottom = 83.0
+custom_constants/separation = 16
+custom_styles/separator = SubResource( 2 )

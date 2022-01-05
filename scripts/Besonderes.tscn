@@ -1,0 +1,133 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://tres/Popup.tres" type="StyleBox" id=1]
+[ext_resource path="res://font/FontMedium.tres" type="DynamicFont" id=2]
+[ext_resource path="res://font/FontMedSmall.tres" type="DynamicFont" id=3]
+[ext_resource path="res://img/icon_look2.png" type="Texture" id=4]
+[ext_resource path="res://img/icon_look.png" type="Texture" id=5]
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=6]
+[ext_resource path="res://font/SelawikSemilight-gxR85.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://tres/ButtonSideR.tres" type="StyleBox" id=8]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends VBoxContainer
+
+onready var textbox = $Text
+
+func _set_text(data):
+	if data != null:
+		textbox.set_text(data)
+
+func _on_ButtonKeyboard_toggled(button_pressed):
+	textbox.set_visible(button_pressed)
+
+func _on_Text_text_changed():
+	var long = textbox.get_text().length()
+	var max_long = 700
+	if long > max_long:
+		var del_long = long - max_long
+		var old_text = textbox.get_text()
+		old_text.erase(0-1,del_long)
+		textbox.set_text(old_text)
+"
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="DynamicFont" id=2]
+size = 28
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 7 )
+
+[node name="Besonderes" type="VBoxContainer"]
+margin_right = 1000.0
+margin_bottom = 1468.0
+size_flags_horizontal = 3
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_right = 1000.0
+margin_bottom = 16.0
+custom_constants/separation = 16
+custom_styles/separator = SubResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 20.0
+margin_right = 1000.0
+margin_bottom = 114.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_top = 15.0
+margin_right = 266.0
+margin_bottom = 78.0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/normal = ExtResource( 6 )
+text = "Besonderes:"
+align = 1
+
+[node name="Hinweis" type="Label" parent="HBoxContainer"]
+margin_left = 270.0
+margin_top = 11.0
+margin_right = 901.0
+margin_bottom = 82.0
+rect_min_size = Vector2( 631, 0 )
+custom_colors/font_color = Color( 0.627451, 0.627451, 0.627451, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = ExtResource( 6 )
+text = "Der Name des Tieres sollte hier nicht erscheinen, damit es im Rate-Spiel verwendet werden kann!"
+align = 1
+autowrap = true
+
+[node name="ButtonKeyboard" type="CheckButton" parent="HBoxContainer"]
+margin_left = 928.0
+margin_right = 1000.0
+margin_bottom = 94.0
+size_flags_horizontal = 10
+custom_constants/check_vadjust = -8
+custom_constants/hseparation = 8
+custom_fonts/font = ExtResource( 2 )
+custom_icons/off = ExtResource( 4 )
+custom_icons/on_disabled = ExtResource( 5 )
+custom_icons/on = ExtResource( 5 )
+custom_icons/off_disabled = ExtResource( 4 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/hover_pressed = ExtResource( 8 )
+custom_styles/normal = ExtResource( 8 )
+shortcut_in_tooltip = false
+pressed = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="TextEdit" parent="."]
+margin_top = 118.0
+margin_right = 1000.0
+margin_bottom = 1518.0
+rect_min_size = Vector2( 1000, 1400 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/read_only = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/normal = ExtResource( 1 )
+custom_styles/completion = ExtResource( 1 )
+override_selected_font_color = true
+smooth_scrolling = true
+wrap_enabled = true
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="toggled" from="HBoxContainer/ButtonKeyboard" to="." method="_on_ButtonKeyboard_toggled"]
+[connection signal="text_changed" from="Text" to="." method="_on_Text_text_changed"]

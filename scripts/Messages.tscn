@@ -1,0 +1,112 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://font/FontSmall.tres" type="DynamicFont" id=1]
+[ext_resource path="res://img/icon_back.png" type="Texture" id=2]
+[ext_resource path="res://font/FontBig.tres" type="DynamicFont" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+onready var ui = $UI
+onready var message_cont = $UI/VBox/ScrollContainer/MessageContainer
+
+signal back_to_menu
+
+func _ready():
+# warning-ignore:return_value_discarded
+	get_tree().get_root().connect(\"size_changed\",self,\"resize\")
+	resize()
+	for i in G.message_data.size():
+		var new_message_entry = preload(\"res://scripts/Message.tscn\").instance()
+		new_message_entry._set_data( {G.message_data.keys()[i]:G.message_data.values()[i]} )
+		message_cont.add_child(new_message_entry)
+
+func resize():
+	ui.set_scale(Vector2(1.0/G.zoom,1.0/G.zoom))
+
+func _on_ButtonBack_pressed():
+	G.save()
+	emit_signal(\"back_to_menu\")
+	queue_free()
+"
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[node name="Messages" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="VBox" type="VBoxContainer" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1080, 1920 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Head" type="HBoxContainer" parent="UI/VBox"]
+margin_right = 1080.0
+margin_bottom = 127.0
+
+[node name="Label" type="Label" parent="UI/VBox/Head"]
+margin_right = 1012.0
+margin_bottom = 127.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 3 )
+text = "Postfach"
+align = 1
+
+[node name="ButtonBack" type="Button" parent="UI/VBox/Head"]
+margin_left = 1016.0
+margin_right = 1080.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+shortcut_in_tooltip = false
+icon = ExtResource( 2 )
+align = 2
+
+[node name="HSeparator" type="HSeparator" parent="UI/VBox"]
+margin_top = 131.0
+margin_right = 1080.0
+margin_bottom = 163.0
+custom_constants/separation = 32
+custom_styles/separator = SubResource( 7 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/VBox"]
+margin_top = 167.0
+margin_right = 1080.0
+margin_bottom = 1920.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageContainer" type="VBoxContainer" parent="UI/VBox/ScrollContainer"]
+margin_right = 1080.0
+margin_bottom = 1753.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 64
+
+[connection signal="pressed" from="UI/VBox/Head/ButtonBack" to="." method="_on_ButtonBack_pressed"]

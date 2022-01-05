@@ -1,0 +1,218 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://tres/ButtonMenu.tres" type="StyleBox" id=2]
+[ext_resource path="res://font/FontSmall.tres" type="DynamicFont" id=3]
+[ext_resource path="res://font/FontMedSmall.tres" type="DynamicFont" id=4]
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=5]
+[ext_resource path="res://img/frame2.png" type="Texture" id=6]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends VBoxContainer
+
+onready var user_name = $Name
+onready var user_id = $ID
+onready var user_pn = $Buttons/PN
+onready var ok_button = $Buttons/OK
+onready var user_status_button = $Buttons/OptionStatus
+
+var data = [\"\"]
+var selectet = 0
+
+func _set_data(new_data):
+	data = new_data
+	if data[1] == \"USER\":
+		selectet = 0
+	elif data[1] == \"CREATOR\":
+		selectet = 1
+	elif data[1] == \"ADMIN\":
+		selectet = 2
+	elif data[1] == \"ROOT\":
+		selectet = 3
+	elif data[1] == \"OUTLAW\":
+		selectet = 4
+	if data[0] == \"\":
+		data[0] = \"Unbekannt\"
+	
+func _ready():
+	user_name.set_text(str(data[0]))
+	user_status_button._select_int(selectet)
+	user_pn.set_text(str(data[2]))
+	user_id.set_text(str(data[4])+\" @ \"+str(data[3]))
+	popup_config()
+	
+func popup_config():
+	var popup = user_status_button.get_popup()
+	popup.add_font_override(\"font\",preload(\"res://font/FontMedium.tres\"))
+	popup.add_stylebox_override(\"panel\",preload(\"res://tres/Popup.tres\"))
+	popup.add_stylebox_override(\"hover\",preload(\"res://tres/PopupH.tres\"))
+	popup.add_color_override(\"font_color_hover\",Color(1,0.54,0.31,1))
+	
+func _on_OK_pressed():
+	ok_button.set_disabled(true)
+	G.users = yield(G.get_SW_data(\"status\"), \"completed\")
+	yield(get_tree().create_timer(0.1), \"timeout\")
+	var ersteller_array = G.db_query(\"select ersteller from Tiere\")
+	var tiernamen_array = G.db_query(\"select name from Tiere\")
+	var my_entries = [0]
+	for i in ersteller_array.size():
+		if ersteller_array[i][\"ersteller\"] == data[0]:
+			var normal_name = G._to_normal_name(tiernamen_array[i][\"name\"])
+			my_entries.append(normal_name)
+	my_entries[0] = my_entries.size()-1
+	data[2] = my_entries
+	G.users[data[4]] = [data[0],data[1],data[2],data[3]]
+	yield(get_tree().create_timer(0.1), \"timeout\")
+	yield(SilentWolf.Players.post_player_data(\"status\",var2str(G.users)), \"sw_player_data_posted\")
+	user_name.set_text(data[0])
+	user_pn.set_text(str(data[2]))
+	get_node(\"/root/Base\")._show_info(str(data[0])+\" ist jetzt ein \"+str(data[1])+\"!\")
+	ok_button.set_disabled(false)
+
+
+func _on_OptionStatus_item_selected(index):
+	selectet = index
+	if selectet == 0:
+		data[1] = \"USER\"
+	elif selectet == 1:
+		data[1] = \"CREATOR\"
+	elif selectet == 2:
+		data[1] = \"ADMIN\"
+	elif selectet == 3:
+		data[1] = \"ROOT\"
+	elif selectet == 4:
+		data[1] = \"OUTLAW\"
+	
+"
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxLine" id=3]
+color = Color( 1, 0.537255, 0.305882, 1 )
+grow_begin = -16.0
+grow_end = -16.0
+thickness = 4
+
+[node name="UserEntry" type="VBoxContainer"]
+margin_right = 1080.0
+margin_bottom = 252.0
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="LineEdit" parent="."]
+margin_right = 1080.0
+margin_bottom = 78.0
+size_flags_horizontal = 3
+custom_colors/selection_color = Color( 0.164706, 0.164706, 0.164706, 1 )
+custom_colors/font_color_selected = Color( 1, 0.537255, 0.305882, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_uneditable = Color( 1, 1, 1, 1 )
+custom_styles/read_only = ExtResource( 5 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/normal = ExtResource( 5 )
+align = 1
+editable = false
+virtual_keyboard_enabled = false
+placeholder_text = "Name"
+
+[node name="Sprite" type="Sprite" parent="Name"]
+self_modulate = Color( 0, 0, 0, 0.784314 )
+scale = Vector2( 1, 0.235185 )
+z_index = -1
+texture = ExtResource( 6 )
+centered = false
+
+[node name="ID" type="LineEdit" parent="."]
+margin_top = 82.0
+margin_right = 1080.0
+margin_bottom = 125.0
+custom_colors/selection_color = Color( 0.164706, 0.164706, 0.164706, 1 )
+custom_colors/font_color_selected = Color( 1, 0.537255, 0.305882, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_uneditable = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/read_only = ExtResource( 5 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/normal = ExtResource( 5 )
+align = 1
+editable = false
+virtual_keyboard_enabled = false
+placeholder_text = "ID"
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+margin_top = 129.0
+margin_right = 1080.0
+margin_bottom = 208.0
+alignment = 2
+
+[node name="PN" type="LineEdit" parent="Buttons"]
+margin_right = 605.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+custom_colors/selection_color = Color( 0.164706, 0.164706, 0.164706, 1 )
+custom_colors/font_color_selected = Color( 1, 0.537255, 0.305882, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_uneditable = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/read_only = ExtResource( 5 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/normal = ExtResource( 5 )
+editable = false
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+
+[node name="OptionStatus" type="OptionButton" parent="Buttons"]
+margin_left = 609.0
+margin_right = 899.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 290, 0 )
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+shortcut_in_tooltip = false
+action_mode = 1
+text = "USER"
+clip_text = true
+align = 1
+items = [ "USER", null, false, 0, null, "CREATOR", null, false, 1, null, "ADMIN", null, false, 2, null, "ROOT", null, false, 3, null, "OUTLAW", null, false, 4, null ]
+selected = 0
+
+[node name="VSeparator" type="VSeparator" parent="Buttons"]
+margin_left = 903.0
+margin_right = 935.0
+margin_bottom = 79.0
+custom_constants/separation = 32
+custom_styles/separator = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OK" type="Button" parent="Buttons"]
+margin_left = 939.0
+margin_right = 1080.0
+margin_bottom = 79.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+shortcut_in_tooltip = false
+text = "OK->"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 212.0
+margin_right = 1080.0
+margin_bottom = 236.0
+custom_constants/separation = 24
+custom_styles/separator = SubResource( 3 )
+
+[connection signal="item_selected" from="Buttons/OptionStatus" to="." method="_on_OptionStatus_item_selected"]
+[connection signal="pressed" from="Buttons/OK" to="." method="_on_OK_pressed"]

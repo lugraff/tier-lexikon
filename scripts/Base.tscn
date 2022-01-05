@@ -1,0 +1,1328 @@
+[gd_scene load_steps=47 format=2]
+
+[ext_resource path="res://img/button.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Base.gd" type="Script" id=2]
+[ext_resource path="res://font/FontMedSmall.tres" type="DynamicFont" id=3]
+[ext_resource path="res://font/FontSmall.tres" type="DynamicFont" id=4]
+[ext_resource path="res://img/icon_back.png" type="Texture" id=5]
+[ext_resource path="res://font/FontMedium.tres" type="DynamicFont" id=6]
+[ext_resource path="res://font/FontBig.tres" type="DynamicFont" id=7]
+[ext_resource path="res://img/frame.png" type="Texture" id=8]
+[ext_resource path="res://scripts/ImgMaker.gd" type="Script" id=9]
+[ext_resource path="res://img/Background.png" type="Texture" id=10]
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=11]
+[ext_resource path="res://font/Prida02calt-j3zO.otf" type="DynamicFontData" id=12]
+[ext_resource path="res://tres/ButtonMenu.tres" type="StyleBox" id=13]
+[ext_resource path="res://img/icon_grabber.png" type="Texture" id=14]
+[ext_resource path="res://tres/slider.tres" type="StyleBox" id=15]
+[ext_resource path="res://img/icon_uncheck.png" type="Texture" id=16]
+[ext_resource path="res://img/icon_check.png" type="Texture" id=17]
+[ext_resource path="res://img/icon_message.png" type="Texture" id=18]
+
+[sub_resource type="DynamicFont" id=17]
+size = 232
+outline_size = 2
+outline_color = Color( 1, 0.207843, 0, 0.352941 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 12 )
+
+[sub_resource type="CanvasItemMaterial" id=14]
+blend_mode = 1
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=27]
+
+[sub_resource type="StyleBoxEmpty" id=28]
+
+[sub_resource type="StyleBoxEmpty" id=29]
+
+[sub_resource type="StyleBoxEmpty" id=30]
+
+[sub_resource type="StyleBoxEmpty" id=31]
+
+[sub_resource type="Animation" id=32]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "new"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -15.0, 0.0 ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=21]
+
+[sub_resource type="StyleBoxEmpty" id=22]
+
+[sub_resource type="StyleBoxEmpty" id=23]
+
+[sub_resource type="StyleBoxEmpty" id=24]
+
+[sub_resource type="StyleBoxEmpty" id=25]
+
+[sub_resource type="StyleBoxEmpty" id=26]
+
+[sub_resource type="GDScript" id=18]
+script/source = "extends Button
+
+func _ready():
+	if OS.has_touchscreen_ui_hint():
+		set_visible(false)
+"
+
+[sub_resource type="CanvasItemMaterial" id=10]
+blend_mode = 2
+
+[sub_resource type="Animation" id=19]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Background/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Background/TextureRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "start"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Background/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 0, 0, 0.392157 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Background/TextureRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Environment" id=11]
+background_mode = 4
+dof_blur_far_distance = 8.89
+dof_blur_far_transition = 41.36
+dof_blur_far_amount = 0.71
+dof_blur_near_distance = 1.78
+dof_blur_near_amount = 0.33
+dof_blur_near_quality = 2
+glow_intensity = 3.66
+glow_strength = 1.34
+glow_bloom = 0.01
+adjustment_enabled = true
+adjustment_contrast = 1.1
+adjustment_saturation = 1.3
+
+[node name="Base" type="Node2D"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 1, 5 )
+z_as_relative = false
+script = ExtResource( 2 )
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Label" type="Label" parent="Background"]
+self_modulate = Color( 1, 0.537255, 0.305882, 1 )
+margin_right = 1080.0
+margin_bottom = 201.0
+rect_min_size = Vector2( 1080, 0 )
+size_flags_vertical = 5
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 0.694118 )
+custom_colors/font_color_shadow = Color( 0.286275, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 17 )
+text = "Tier Lexikon "
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+self_modulate = Color( 0.74902, 0.74902, 0.74902, 1 )
+material = SubResource( 14 )
+margin_right = 1080.0
+margin_bottom = 1920.0
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="."]
+visible = false
+margin_right = 1080.0
+margin_bottom = 1920.0
+rect_min_size = Vector2( 1080, 1920 )
+custom_constants/separation = 22
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="Menu"]
+margin_right = 1080.0
+margin_bottom = 256.0
+custom_constants/separation = 256
+custom_styles/separator = SubResource( 16 )
+
+[node name="AnimalABC" type="Button" parent="Menu"]
+margin_top = 278.0
+margin_right = 1080.0
+margin_bottom = 405.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0 )
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 7 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = ExtResource( 11 )
+shortcut_in_tooltip = false
+text = "Tiere A-Z"
+
+[node name="GuessGame" type="Button" parent="Menu"]
+margin_top = 427.0
+margin_right = 1080.0
+margin_bottom = 554.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 7 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+disabled = true
+shortcut_in_tooltip = false
+text = "Tiere erraten"
+
+[node name="Label" type="Label" parent="Menu/GuessGame"]
+margin_right = 40.0
+margin_bottom = 78.0
+custom_colors/font_color = Color( 0.619608, 0.423529, 0.329412, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = " fast fertig:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Memory" type="Button" parent="Menu"]
+margin_top = 576.0
+margin_right = 1080.0
+margin_bottom = 703.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 7 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+disabled = true
+shortcut_in_tooltip = false
+text = "Memory"
+
+[node name="Label" type="Label" parent="Menu/Memory"]
+margin_right = 40.0
+margin_bottom = 78.0
+custom_colors/font_color = Color( 0.619608, 0.423529, 0.329412, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = " kommt bald:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Klowledge" type="Button" parent="Menu"]
+margin_top = 725.0
+margin_right = 1080.0
+margin_bottom = 852.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 7 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+disabled = true
+shortcut_in_tooltip = false
+text = "Wissenswertes"
+
+[node name="Label" type="Label" parent="Menu/Klowledge"]
+margin_right = 40.0
+margin_bottom = 78.0
+custom_colors/font_color = Color( 0.619608, 0.423529, 0.329412, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = " kommt vielleicht:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator2" type="HSeparator" parent="Menu"]
+margin_top = 874.0
+margin_right = 1080.0
+margin_bottom = 1084.0
+size_flags_vertical = 3
+custom_styles/separator = SubResource( 16 )
+
+[node name="Add" type="Button" parent="Menu"]
+visible = false
+margin_top = 1003.0
+margin_right = 1080.0
+margin_bottom = 1130.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0 )
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 7 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = ExtResource( 11 )
+shortcut_in_tooltip = false
+text = "Eintrag erstellen"
+
+[node name="Help" type="Button" parent="Menu"]
+visible = false
+margin_top = 814.0
+margin_right = 1080.0
+margin_bottom = 941.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0 )
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 7 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = ExtResource( 11 )
+shortcut_in_tooltip = false
+text = "Creator Anleitung"
+
+[node name="Change" type="Button" parent="Menu"]
+visible = false
+margin_top = 814.0
+margin_right = 1080.0
+margin_bottom = 941.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0 )
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 7 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = ExtResource( 11 )
+shortcut_in_tooltip = false
+text = "Eintrag bearbeiten"
+
+[node name="ShowUsers" type="Button" parent="Menu"]
+visible = false
+margin_top = 1169.0
+margin_right = 1080.0
+margin_bottom = 1296.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0 )
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 7 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = ExtResource( 11 )
+shortcut_in_tooltip = false
+text = "Verwalte Benutzer"
+
+[node name="HSeparator3" type="HSeparator" parent="Menu"]
+margin_top = 1106.0
+margin_right = 1080.0
+margin_bottom = 1316.0
+size_flags_vertical = 3
+custom_styles/separator = SubResource( 16 )
+
+[node name="Options" type="Button" parent="Menu"]
+margin_top = 1338.0
+margin_right = 1080.0
+margin_bottom = 1465.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0 )
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 7 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = ExtResource( 11 )
+shortcut_in_tooltip = false
+text = "Einstellungen"
+
+[node name="Credits" type="Button" parent="Menu"]
+margin_top = 1487.0
+margin_right = 1080.0
+margin_bottom = 1614.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0 )
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 7 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = ExtResource( 11 )
+shortcut_in_tooltip = false
+text = "Credits"
+
+[node name="Quit" type="Button" parent="Menu"]
+margin_top = 1636.0
+margin_right = 1080.0
+margin_bottom = 1763.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0 )
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 7 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = ExtResource( 11 )
+shortcut_in_tooltip = false
+text = "Beenden"
+
+[node name="Infos" type="HBoxContainer" parent="Menu"]
+margin_top = 1785.0
+margin_right = 1080.0
+margin_bottom = 1920.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Status" type="Label" parent="Menu/Infos"]
+margin_top = 46.0
+margin_right = 107.0
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 4 )
+text = "Offline"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonGotMessage" type="Button" parent="Menu/Infos"]
+margin_left = 111.0
+margin_right = 191.0
+margin_bottom = 135.0
+custom_styles/hover = SubResource( 27 )
+custom_styles/pressed = SubResource( 28 )
+custom_styles/focus = SubResource( 29 )
+custom_styles/disabled = SubResource( 30 )
+custom_styles/normal = SubResource( 31 )
+disabled = true
+shortcut_in_tooltip = false
+icon = ExtResource( 18 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/Infos/ButtonGotMessage"]
+anims/RESET = SubResource( 32 )
+anims/new = SubResource( 33 )
+
+[node name="Version" type="Label" parent="Menu/Infos"]
+margin_left = 195.0
+margin_right = 1080.0
+margin_bottom = 135.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "Stelle sicher, dass du mit dem Internet verbunden bist und starte die App neu um den Online Modus zu aktivieren."
+align = 2
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="VBoxContainer" parent="."]
+visible = false
+margin_right = 1080.0
+margin_bottom = 740.0
+rect_min_size = Vector2( 1080, 1900 )
+custom_constants/separation = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Sprite" parent="Options"]
+self_modulate = Color( 0, 0, 0, 0.627451 )
+scale = Vector2( 2, 5.81985 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="HeadBox" type="HBoxContainer" parent="Options"]
+margin_right = 1080.0
+margin_bottom = 127.0
+
+[node name="Label" type="Label" parent="Options/HeadBox"]
+margin_right = 1012.0
+margin_bottom = 127.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 7 )
+text = "  Einstellungen"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonBackOptions" type="Button" parent="Options/HeadBox"]
+margin_left = 1016.0
+margin_right = 1080.0
+margin_bottom = 127.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+shortcut_in_tooltip = false
+icon = ExtResource( 5 )
+
+[node name="HSeparator" type="HSeparator" parent="Options"]
+margin_top = 159.0
+margin_right = 1080.0
+margin_bottom = 287.0
+custom_constants/separation = 128
+custom_styles/separator = SubResource( 15 )
+
+[node name="WindowMode" type="HBoxContainer" parent="Options"]
+visible = false
+margin_top = 319.0
+margin_right = 1080.0
+margin_bottom = 413.0
+custom_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="Options/WindowMode"]
+margin_left = 203.0
+margin_top = 8.0
+margin_right = 494.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 6 )
+text = "Window Mode"
+align = 2
+
+[node name="CheckButtonWindowMode" type="CheckButton" parent="Options/WindowMode"]
+margin_right = 76.0
+margin_bottom = 86.0
+custom_icons/off = ExtResource( 16 )
+custom_icons/on_disabled = ExtResource( 17 )
+custom_icons/on = ExtResource( 17 )
+custom_icons/off_disabled = ExtResource( 16 )
+custom_styles/hover = SubResource( 21 )
+custom_styles/pressed = SubResource( 22 )
+custom_styles/focus = SubResource( 23 )
+custom_styles/disabled = SubResource( 24 )
+custom_styles/hover_pressed = SubResource( 25 )
+custom_styles/normal = SubResource( 26 )
+
+[node name="AutoScroll" type="HBoxContainer" parent="Options"]
+margin_top = 319.0
+margin_right = 1080.0
+margin_bottom = 413.0
+custom_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="Options/AutoScroll"]
+margin_left = 203.0
+margin_top = 8.0
+margin_right = 494.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 6 )
+text = "Auto Scroll"
+align = 2
+
+[node name="OptionScroll" type="OptionButton" parent="Options/AutoScroll"]
+margin_left = 526.0
+margin_right = 876.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 350, 0 )
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+shortcut_in_tooltip = false
+action_mode = 1
+text = "Langsam"
+clip_text = true
+align = 1
+items = [ "Aus", null, false, 0, null, "Langsam", null, false, 1, null, "Mittel", null, false, 2, null, "Schnell", null, false, 3, null ]
+selected = 1
+
+[node name="TextSize" type="HBoxContainer" parent="Options"]
+margin_top = 445.0
+margin_right = 1080.0
+margin_bottom = 525.0
+custom_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="Options/TextSize"]
+margin_left = 152.0
+margin_top = 1.0
+margin_right = 463.0
+margin_bottom = 79.0
+custom_fonts/font = ExtResource( 6 )
+text = "Text Grösse"
+align = 2
+
+[node name="HSliderTextSize" type="HSlider" parent="Options/TextSize"]
+margin_left = 495.0
+margin_right = 795.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 300, 0 )
+custom_icons/grabber_disabled = ExtResource( 14 )
+custom_icons/grabber_highlight = ExtResource( 14 )
+custom_icons/grabber = ExtResource( 14 )
+custom_styles/slider = ExtResource( 15 )
+min_value = 1.0
+max_value = 3.0
+value = 3.0
+tick_count = 3
+ticks_on_borders = true
+
+[node name="TextSizeValue" type="Label" parent="Options/TextSize"]
+margin_left = 827.0
+margin_top = 1.0
+margin_right = 927.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 100, 0 )
+custom_fonts/font = ExtResource( 6 )
+text = "3"
+
+[node name="OfflineSave" type="HBoxContainer" parent="Options"]
+margin_top = 557.0
+margin_right = 1080.0
+margin_bottom = 637.0
+custom_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="Options/OfflineSave"]
+margin_left = 136.0
+margin_top = 1.0
+margin_right = 479.0
+margin_bottom = 79.0
+custom_fonts/font = ExtResource( 6 )
+text = "Fotospeicher"
+align = 2
+
+[node name="HSliderImgMax" type="HSlider" parent="Options/OfflineSave"]
+margin_left = 511.0
+margin_right = 811.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 300, 0 )
+custom_icons/grabber_disabled = ExtResource( 14 )
+custom_icons/grabber_highlight = ExtResource( 14 )
+custom_icons/grabber = ExtResource( 14 )
+custom_styles/slider = ExtResource( 15 )
+min_value = 3.0
+max_value = 300.0
+value = 30.0
+tick_count = 2
+ticks_on_borders = true
+
+[node name="SaveImgValue" type="Label" parent="Options/OfflineSave"]
+margin_left = 843.0
+margin_top = 1.0
+margin_right = 943.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 100, 0 )
+custom_fonts/font = ExtResource( 6 )
+text = "30"
+
+[node name="FotoCount" type="Label" parent="Options"]
+margin_top = 669.0
+margin_right = 1080.0
+margin_bottom = 747.0
+custom_fonts/font = ExtResource( 6 )
+text = "0 Fotos gespeichert"
+align = 1
+
+[node name="OfflineSave2" type="HBoxContainer" parent="Options"]
+margin_top = 779.0
+margin_right = 1080.0
+margin_bottom = 873.0
+custom_constants/separation = 64
+alignment = 1
+
+[node name="ShowIMG" type="Button" parent="Options/OfflineSave2"]
+margin_left = 137.0
+margin_right = 494.0
+margin_bottom = 94.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+shortcut_in_tooltip = false
+text = "Fotos zeigen"
+script = SubResource( 18 )
+
+[node name="DeleteIMG" type="Button" parent="Options/OfflineSave2"]
+margin_left = 558.0
+margin_right = 943.0
+margin_bottom = 94.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+shortcut_in_tooltip = false
+text = "Fotos löschen"
+
+[node name="HSeparator2" type="HSeparator" parent="Options"]
+margin_top = 905.0
+margin_right = 1080.0
+margin_bottom = 937.0
+custom_constants/separation = 32
+custom_styles/separator = SubResource( 15 )
+
+[node name="CreatorNew" type="Button" parent="Options"]
+visible = false
+margin_left = 224.0
+margin_top = 955.0
+margin_right = 855.0
+margin_bottom = 1047.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+shortcut_in_tooltip = false
+text = "Ich will Creator werden!"
+
+[node name="HSeparator3" type="HSeparator" parent="Options"]
+margin_top = 969.0
+margin_right = 1080.0
+margin_bottom = 1001.0
+custom_constants/separation = 32
+custom_styles/separator = SubResource( 15 )
+
+[node name="DelDBConfig" type="Button" parent="Options"]
+margin_left = 62.0
+margin_top = 1033.0
+margin_right = 1017.0
+margin_bottom = 1127.0
+size_flags_horizontal = 4
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+toggle_mode = true
+shortcut_in_tooltip = false
+text = "DB und Einstellungen zurücksetzen"
+
+[node name="Reload" type="HBoxContainer" parent="Options"]
+visible = false
+margin_left = 187.0
+margin_top = 1143.0
+margin_right = 893.0
+margin_bottom = 1235.0
+size_flags_horizontal = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Options/Reload"]
+margin_top = 8.0
+margin_right = 610.0
+margin_bottom = 84.0
+custom_fonts/font = ExtResource( 6 )
+text = "Wirklich alles löschen?  "
+align = 2
+
+[node name="DelDBConfigOK" type="Button" parent="Options/Reload"]
+margin_left = 614.0
+margin_right = 706.0
+margin_bottom = 92.0
+size_flags_horizontal = 4
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+shortcut_in_tooltip = false
+text = "JA!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator1" type="HSeparator" parent="Options"]
+margin_top = 1159.0
+margin_right = 1080.0
+margin_bottom = 1191.0
+custom_constants/separation = 32
+custom_styles/separator = SubResource( 15 )
+
+[node name="SWBox" type="HBoxContainer" parent="Options"]
+margin_left = 540.0
+margin_top = 1223.0
+margin_right = 540.0
+margin_bottom = 1223.0
+size_flags_horizontal = 4
+custom_constants/separation = 64
+
+[node name="SWDBTurnOff" type="Button" parent="Options/SWBox"]
+visible = false
+margin_right = 417.0
+margin_bottom = 92.0
+size_flags_horizontal = 4
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+toggle_mode = true
+shortcut_in_tooltip = false
+text = "Silent Wolf OFF"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SWDBTurnOn" type="Button" parent="Options/SWBox"]
+visible = false
+margin_left = 481.0
+margin_right = 902.0
+margin_bottom = 92.0
+size_flags_horizontal = 4
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+toggle_mode = true
+shortcut_in_tooltip = false
+text = "Silent Wolf ON "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UniqueID" type="Label" parent="Options"]
+self_modulate = Color( 0.588235, 0.588235, 0.588235, 1 )
+margin_top = 1837.0
+margin_right = 1080.0
+margin_bottom = 1900.0
+size_flags_vertical = 10
+custom_fonts/font = ExtResource( 3 )
+text = "USER-ID:"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="VBoxContainer" parent="."]
+visible = false
+margin_right = 1080.0
+margin_bottom = 1920.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeadBox" type="HBoxContainer" parent="Credits"]
+margin_right = 1080.0
+margin_bottom = 127.0
+
+[node name="Label" type="Label" parent="Credits/HeadBox"]
+margin_right = 1012.0
+margin_bottom = 127.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 7 )
+text = "Credits"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonBackCredits" type="Button" parent="Credits/HeadBox"]
+margin_left = 1016.0
+margin_right = 1080.0
+margin_bottom = 127.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+shortcut_in_tooltip = false
+icon = ExtResource( 5 )
+
+[node name="CreditText" type="RichTextLabel" parent="Credits"]
+margin_top = 131.0
+margin_right = 1080.0
+margin_bottom = 1920.0
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 3 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+bbcode_enabled = true
+bbcode_text = "[center]
+TierLexikon von Lugraff unter MIT
+[url]https://spacebase1.wordpress.com/[/url]
+
+Erstellt mit Godot Engine 3.4 unter MIT
+[url]https://godotengine.org/[/url]
+
+Online-Database hostet by Silent Wolf unter Copyright SilentWolf 2019-2021. Alle rechte vorbehalten.
+[url]https://silentwolf.com/[/url]
+
+Hintergrundbild von Nick Roach unter GNU2.0 [url]https://commons.wikimedia.org/wiki/File:Elegant_Background-12.jpg[/url]
+
+Adler Logo Foto voncocoparisienne unter CC0 1.0
+[url]https://pixabay.com/photos/adler-bald-eagle-raptor-bird-head-2611528/[/url]
+
+Font Prida02Calt von Gluk unter OFL
+[url]https://www.fontspace.com/prida02calt-font-f22936[/url]
+
+Font Selawik von Microsoft unter OFL
+[url]https://www.fontspace.com/selawik-font-f56397[/url]
+
+Icons von Lorc unter CC BY 3.0
+[url]https://game-icons.net/[/url]
+
+GDNative wrapper von SQLite from 2shady4u unter MIT
+[url]https://github.com/2shady4u/godot-sqlite[/url]
+
+
+Diese App wird unter der folgenden Lizenz verfügbar gemacht:
+MIT Lizenz
+Copyright (c) 2007-2021 Lucas Rosswog
+
+Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die \"Software\") erhält, kostenlos die Erlaubnis erteilt, mit der Software ohne Einschränkung zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen , Kopien der Software zu veröffentlichen, zu verteilen, unterzulizenzieren und/oder zu verkaufen und Personen, denen die Software zur Verfügung gestellt wird, dies zu gestatten, vorbehaltlich der folgenden Bedingungen:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD \"WIE BESEHEN\" BEREITGESTELLT, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNGEN DER MARKTFÄHIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG VON VERLETZUNGEN. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, OB AUS VERTRAGLICHEM, SCHLECHTER ODER ANDERWEITIGEM, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN HANDELN IN DER SOFTWARE.
+
+Diese App verwendet die Godot Engine 3.4, die unter der folgenden Lizenz verfügbar ist:
+MIT Lizenz
+Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2021 Godot Engine-Mitwirkende.
+
+Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die \"Software\") erhält, kostenlos die Erlaubnis erteilt, mit der Software ohne Einschränkung zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen , Kopien der Software zu veröffentlichen, zu verteilen, unterzulizenzieren und/oder zu verkaufen und Personen, denen die Software zur Verfügung gestellt wird, dies zu gestatten, vorbehaltlich der folgenden Bedingungen:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD \"WIE BESEHEN\" BEREITGESTELLT, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNGEN DER MARKTFÄHIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG VON VERLETZUNGEN. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, OB AUS VERTRAGLICHEM, SCHLECHTER ODER ANDERWEITIGEM, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN HANDELN IN DER SOFTWARE.
+
+Diese App verwendet FreeType, die unter der folgenden Lizenz verfügbar ist:
+Teile dieser Software unterliegen dem Copyright © 1996 - 2020 The FreeType Project (www.freetype.org). Alle Rechte vorbehalten.
+
+Diese App verwendet ENet, die unter der folgenden Lizenz verfügbar ist:
+MIT Lizenz
+Copyright (c) 2002-2020 Lee Salzman
+
+Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die \"Software\") erhält, kostenlos die Erlaubnis erteilt, mit der Software ohne Einschränkung zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen , Kopien der Software zu veröffentlichen, zu verteilen, unterzulizenzieren und/oder zu verkaufen und Personen, denen die Software zur Verfügung gestellt wird, dies zu gestatten, vorbehaltlich der folgenden Bedingungen:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD \"WIE BESEHEN\" BEREITGESTELLT, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNGEN DER MARKTFÄHIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG VON VERLETZUNGEN. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, OB AUS VERTRAGLICHEM, SCHLECHTER ODER ANDERWEITIGEM, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN HANDELN IN DER SOFTWARE.
+
+Diese App verwendet MBedTLS, die unter der folgenden Lizenz verfügbar ist:
+Copyright Die Mbed TLS-Mitwirkenden
+
+Lizenziert unter der Apache-Lizenz, Version 2.0 (die „Lizenz“); Sie dürfen diese Datei nur in Übereinstimmung mit der Lizenz verwenden. Eine Kopie der Lizenz erhalten Sie unter
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Sofern nicht gesetzlich vorgeschrieben oder schriftlich vereinbart, wird die im Rahmen der Lizenz vertriebene Software \"WIE BESEHEN\" OHNE ausdrückliche oder stillschweigende Gewährleistungen oder Bedingungen jeglicher Art vertrieben. Siehe die Lizenz für die spezifische Sprache, die Berechtigungen und Beschränkungen unter der Lizenz regelt.
+
+Diese App verwendet GDNative wrapper for SQLite, die unter der folgenden Lizenz verfügbar ist:
+MIT Lizenz
+Copyright (c) 2019-2021 Piet Bronders & Jeroen De Geeter
+
+Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die \"Software\") erhält, kostenlos die Erlaubnis erteilt, mit der Software ohne Einschränkung zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen , Kopien der Software zu veröffentlichen, zu verteilen, unterzulizenzieren und/oder zu verkaufen und Personen, denen die Software zur Verfügung gestellt wird, dies zu gestatten, vorbehaltlich der folgenden Bedingungen:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD \"WIE BESEHEN\" BEREITGESTELLT, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNGEN DER MARKTFÄHIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG VON VERLETZUNGEN. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, OB AUS VERTRAGLICHEM, SCHLECHTER ODER ANDERWEITIGEM, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN HANDELN IN DER SOFTWARE.
+
+
+This app is made available under the following license:
+MIT license
+Copyright (c) 2007-2021 Lucas Rosswog
+
+This is used by anyone who has a copy of this software and its associated
+Documentation files (the \"Software\"), given free of charge permission to trade in the Software without limitation, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and / or copy copies of the Software or sell and permit persons to whom the software is made available to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial parts of the software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY, WHETHER CONTRACTUAL, BAD OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR USE OR OTHER TRADE IN THE SOFTWARE.
+
+This app uses the Godot Engine 3.4, which is available under the following license:
+MIT license
+Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2021 Godot Engine contributors.
+
+Any person who receives a copy of this software and the associated documentation files (the \"Software\") is hereby granted permission free of charge to deal with the software without restriction, including without limitation the rights to use, copy, modify, merge To publish, distribute, sublicense and / or sell copies of the software and to permit persons to whom the software is made available to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial parts of the software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY, WHETHER CONTRACTUAL, BAD OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR USE OR OTHER TRADE IN THE SOFTWARE.
+
+This app uses FreeType, which is available under the following license:
+Portions of this software are Copyright © 1996-2020 The FreeType Project (www.freetype.org). All rights reserved.
+
+This app uses ENet, which is available under the following license:
+MIT license
+Copyright (c) 2002-2020 Lee Salzman
+
+Any person who receives a copy of this software and the associated documentation files (the \"Software\") is hereby granted permission free of charge to deal with the software without restriction, including without limitation the rights to use, copy, modify, merge To publish, distribute, sublicense and / or sell copies of the software and to permit persons to whom the software is made available to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial parts of the software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY, WHETHER CONTRACTUAL, BAD OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR USE OR OTHER TRADE IN THE SOFTWARE.
+
+This app uses MBedTLS which is available under the following license:
+Copyright The Mbed TLS Contributors
+
+Licensed under the Apache License, Version 2.0 (the “License”); You may only use this file in accordance with the license. You can get a copy of the license at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by law or agreed in writing, the software distributed under the license is distributed \"AS IS\" WITHOUT express or implied warranties or conditions of any kind. See the license for the specific language that governs permissions and restrictions under the license.
+
+This app uses GDNative wrapper for SQLite, which is available under the following license:
+MIT license
+Copyright (c) 2019-2021 Piet Bronders & Jeroen De Geeter
+
+Any person who receives a copy of this software and the associated documentation files (the \"Software\") is hereby granted permission free of charge to deal with the software without restriction, including without limitation the rights to use, copy, modify, merge To publish, distribute, sublicense and / or sell copies of the software and to permit persons to whom the software is made available to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial parts of the software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY, WHETHER CONTRACTUAL, BAD OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR USE OR OTHER TRADE IN THE SOFTWARE.
+[/center]"
+text = "
+TierLexikon von Lugraff unter MIT
+https://spacebase1.wordpress.com/
+
+Erstellt mit Godot Engine 3.4 unter MIT
+https://godotengine.org/
+
+Online-Database hostet by Silent Wolf unter Copyright SilentWolf 2019-2021. Alle rechte vorbehalten.
+https://silentwolf.com/
+
+Hintergrundbild von Nick Roach unter GNU2.0 https://commons.wikimedia.org/wiki/File:Elegant_Background-12.jpg
+
+Adler Logo Foto voncocoparisienne unter CC0 1.0
+https://pixabay.com/photos/adler-bald-eagle-raptor-bird-head-2611528/
+
+Font Prida02Calt von Gluk unter OFL
+https://www.fontspace.com/prida02calt-font-f22936
+
+Font Selawik von Microsoft unter OFL
+https://www.fontspace.com/selawik-font-f56397
+
+Icons von Lorc unter CC BY 3.0
+https://game-icons.net/
+
+GDNative wrapper von SQLite from 2shady4u unter MIT
+https://github.com/2shady4u/godot-sqlite
+
+
+Diese App wird unter der folgenden Lizenz verfügbar gemacht:
+MIT Lizenz
+Copyright (c) 2007-2021 Lucas Rosswog
+
+Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die \"Software\") erhält, kostenlos die Erlaubnis erteilt, mit der Software ohne Einschränkung zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen , Kopien der Software zu veröffentlichen, zu verteilen, unterzulizenzieren und/oder zu verkaufen und Personen, denen die Software zur Verfügung gestellt wird, dies zu gestatten, vorbehaltlich der folgenden Bedingungen:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD \"WIE BESEHEN\" BEREITGESTELLT, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNGEN DER MARKTFÄHIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG VON VERLETZUNGEN. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, OB AUS VERTRAGLICHEM, SCHLECHTER ODER ANDERWEITIGEM, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN HANDELN IN DER SOFTWARE.
+
+Diese App verwendet die Godot Engine 3.4, die unter der folgenden Lizenz verfügbar ist:
+MIT Lizenz
+Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2021 Godot Engine-Mitwirkende.
+
+Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die \"Software\") erhält, kostenlos die Erlaubnis erteilt, mit der Software ohne Einschränkung zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen , Kopien der Software zu veröffentlichen, zu verteilen, unterzulizenzieren und/oder zu verkaufen und Personen, denen die Software zur Verfügung gestellt wird, dies zu gestatten, vorbehaltlich der folgenden Bedingungen:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD \"WIE BESEHEN\" BEREITGESTELLT, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNGEN DER MARKTFÄHIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG VON VERLETZUNGEN. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, OB AUS VERTRAGLICHEM, SCHLECHTER ODER ANDERWEITIGEM, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN HANDELN IN DER SOFTWARE.
+
+Diese App verwendet FreeType, die unter der folgenden Lizenz verfügbar ist:
+Teile dieser Software unterliegen dem Copyright © 1996 - 2020 The FreeType Project (www.freetype.org). Alle Rechte vorbehalten.
+
+Diese App verwendet ENet, die unter der folgenden Lizenz verfügbar ist:
+MIT Lizenz
+Copyright (c) 2002-2020 Lee Salzman
+
+Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die \"Software\") erhält, kostenlos die Erlaubnis erteilt, mit der Software ohne Einschränkung zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen , Kopien der Software zu veröffentlichen, zu verteilen, unterzulizenzieren und/oder zu verkaufen und Personen, denen die Software zur Verfügung gestellt wird, dies zu gestatten, vorbehaltlich der folgenden Bedingungen:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD \"WIE BESEHEN\" BEREITGESTELLT, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNGEN DER MARKTFÄHIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG VON VERLETZUNGEN. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, OB AUS VERTRAGLICHEM, SCHLECHTER ODER ANDERWEITIGEM, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN HANDELN IN DER SOFTWARE.
+
+Diese App verwendet MBedTLS, die unter der folgenden Lizenz verfügbar ist:
+Copyright Die Mbed TLS-Mitwirkenden
+
+Lizenziert unter der Apache-Lizenz, Version 2.0 (die „Lizenz“); Sie dürfen diese Datei nur in Übereinstimmung mit der Lizenz verwenden. Eine Kopie der Lizenz erhalten Sie unter
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Sofern nicht gesetzlich vorgeschrieben oder schriftlich vereinbart, wird die im Rahmen der Lizenz vertriebene Software \"WIE BESEHEN\" OHNE ausdrückliche oder stillschweigende Gewährleistungen oder Bedingungen jeglicher Art vertrieben. Siehe die Lizenz für die spezifische Sprache, die Berechtigungen und Beschränkungen unter der Lizenz regelt.
+
+Diese App verwendet GDNative wrapper for SQLite, die unter der folgenden Lizenz verfügbar ist:
+MIT Lizenz
+Copyright (c) 2019-2021 Piet Bronders & Jeroen De Geeter
+
+Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die \"Software\") erhält, kostenlos die Erlaubnis erteilt, mit der Software ohne Einschränkung zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen , Kopien der Software zu veröffentlichen, zu verteilen, unterzulizenzieren und/oder zu verkaufen und Personen, denen die Software zur Verfügung gestellt wird, dies zu gestatten, vorbehaltlich der folgenden Bedingungen:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD \"WIE BESEHEN\" BEREITGESTELLT, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNGEN DER MARKTFÄHIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG VON VERLETZUNGEN. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, OB AUS VERTRAGLICHEM, SCHLECHTER ODER ANDERWEITIGEM, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN HANDELN IN DER SOFTWARE.
+
+
+This app is made available under the following license:
+MIT license
+Copyright (c) 2007-2021 Lucas Rosswog
+
+This is used by anyone who has a copy of this software and its associated
+Documentation files (the \"Software\"), given free of charge permission to trade in the Software without limitation, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and / or copy copies of the Software or sell and permit persons to whom the software is made available to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial parts of the software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY, WHETHER CONTRACTUAL, BAD OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR USE OR OTHER TRADE IN THE SOFTWARE.
+
+This app uses the Godot Engine 3.4, which is available under the following license:
+MIT license
+Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2021 Godot Engine contributors.
+
+Any person who receives a copy of this software and the associated documentation files (the \"Software\") is hereby granted permission free of charge to deal with the software without restriction, including without limitation the rights to use, copy, modify, merge To publish, distribute, sublicense and / or sell copies of the software and to permit persons to whom the software is made available to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial parts of the software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY, WHETHER CONTRACTUAL, BAD OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR USE OR OTHER TRADE IN THE SOFTWARE.
+
+This app uses FreeType, which is available under the following license:
+Portions of this software are Copyright © 1996-2020 The FreeType Project (www.freetype.org). All rights reserved.
+
+This app uses ENet, which is available under the following license:
+MIT license
+Copyright (c) 2002-2020 Lee Salzman
+
+Any person who receives a copy of this software and the associated documentation files (the \"Software\") is hereby granted permission free of charge to deal with the software without restriction, including without limitation the rights to use, copy, modify, merge To publish, distribute, sublicense and / or sell copies of the software and to permit persons to whom the software is made available to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial parts of the software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY, WHETHER CONTRACTUAL, BAD OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR USE OR OTHER TRADE IN THE SOFTWARE.
+
+This app uses MBedTLS which is available under the following license:
+Copyright The Mbed TLS Contributors
+
+Licensed under the Apache License, Version 2.0 (the “License”); You may only use this file in accordance with the license. You can get a copy of the license at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by law or agreed in writing, the software distributed under the license is distributed \"AS IS\" WITHOUT express or implied warranties or conditions of any kind. See the license for the specific language that governs permissions and restrictions under the license.
+
+This app uses GDNative wrapper for SQLite, which is available under the following license:
+MIT license
+Copyright (c) 2019-2021 Piet Bronders & Jeroen De Geeter
+
+Any person who receives a copy of this software and the associated documentation files (the \"Software\") is hereby granted permission free of charge to deal with the software without restriction, including without limitation the rights to use, copy, modify, merge To publish, distribute, sublicense and / or sell copies of the software and to permit persons to whom the software is made available to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial parts of the software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY, WHETHER CONTRACTUAL, BAD OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR USE OR OTHER TRADE IN THE SOFTWARE.
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ImgMaker" type="Node2D" parent="."]
+script = ExtResource( 9 )
+
+[node name="LoadingPercent" type="Label" parent="ImgMaker"]
+margin_left = -12.0
+margin_right = 1068.0
+margin_bottom = 1360.0
+rect_min_size = Vector2( 1080, 1360 )
+custom_colors/font_color = Color( 0.941176, 0.686275, 0.384314, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_y = 8
+custom_fonts/font = ExtResource( 3 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="ViewportContainer" parent="ImgMaker"]
+margin_top = -1080.0
+margin_right = 1080.0
+rect_min_size = Vector2( 1080, 1080 )
+rect_clip_content = true
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="ImgMaker/Container"]
+size = Vector2( 1080, 1080 )
+transparent_bg = true
+handle_input_locally = false
+hdr = false
+disable_3d = true
+usage = 0
+render_target_clear_mode = 1
+render_target_update_mode = 3
+
+[node name="Foto" type="Sprite" parent="ImgMaker/Container/Viewport"]
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1080, 1080 )
+region_filter_clip = true
+
+[node name="FotoFrame" type="Sprite" parent="ImgMaker/Container/Viewport"]
+material = SubResource( 10 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="HTTP" type="Node" parent="ImgMaker/Container"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+editor_draw_screen = false
+
+[node name="FadeIn" type="AnimationPlayer" parent="."]
+autoplay = "start"
+anims/RESET = SubResource( 19 )
+anims/start = SubResource( 20 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 11 )
+
+[connection signal="pressed" from="Menu/AnimalABC" to="." method="_on_AnimalABC_pressed"]
+[connection signal="pressed" from="Menu/GuessGame" to="." method="_on_GuessGame_pressed"]
+[connection signal="pressed" from="Menu/Memory" to="." method="_on_SpecialSearch_pressed"]
+[connection signal="pressed" from="Menu/Add" to="." method="_on_Add_pressed"]
+[connection signal="pressed" from="Menu/Help" to="." method="_on_Help_pressed"]
+[connection signal="pressed" from="Menu/Change" to="." method="_on_Change_pressed"]
+[connection signal="pressed" from="Menu/ShowUsers" to="." method="_on_ShowUsers_pressed"]
+[connection signal="pressed" from="Menu/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="Menu/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="Menu/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="Menu/Infos/ButtonGotMessage" to="." method="_on_ButtonGotMessage_pressed"]
+[connection signal="pressed" from="Options/HeadBox/ButtonBackOptions" to="." method="_on_ButtonBackOptions_pressed"]
+[connection signal="toggled" from="Options/WindowMode/CheckButtonWindowMode" to="." method="_on_CheckButtonWindowMode_toggled"]
+[connection signal="item_selected" from="Options/AutoScroll/OptionScroll" to="." method="_on_OptionButton_item_selected"]
+[connection signal="value_changed" from="Options/TextSize/HSliderTextSize" to="." method="_on_HSliderTextSize_value_changed"]
+[connection signal="value_changed" from="Options/OfflineSave/HSliderImgMax" to="." method="_on_HSliderImgMax_value_changed"]
+[connection signal="pressed" from="Options/OfflineSave2/ShowIMG" to="." method="_on_ShowIMG_pressed"]
+[connection signal="pressed" from="Options/OfflineSave2/DeleteIMG" to="." method="_on_DeleteIMG_pressed"]
+[connection signal="pressed" from="Options/CreatorNew" to="." method="_on_CreatorNew_pressed"]
+[connection signal="toggled" from="Options/DelDBConfig" to="." method="_on_DelDBConfig_toggled"]
+[connection signal="pressed" from="Options/Reload/DelDBConfigOK" to="." method="_on_DelDBConfigOK_pressed"]
+[connection signal="pressed" from="Options/SWBox/SWDBTurnOff" to="." method="_on_SWDBTurnOff_pressed"]
+[connection signal="pressed" from="Options/SWBox/SWDBTurnOn" to="." method="_on_SWDBTurnOn_pressed"]
+[connection signal="pressed" from="Credits/HeadBox/ButtonBackCredits" to="." method="_on_ButtonBackCredits_pressed"]
+[connection signal="meta_clicked" from="Credits/CreditText" to="." method="_on_CreditText_meta_clicked"]

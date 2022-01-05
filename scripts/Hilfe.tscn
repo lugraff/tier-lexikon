@@ -1,0 +1,195 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://font/FontMedSmall.tres" type="DynamicFont" id=1]
+[ext_resource path="res://img/icon_back.png" type="Texture" id=2]
+[ext_resource path="res://tres/ButtonMenu.tres" type="StyleBox" id=3]
+[ext_resource path="res://img/help/Help_Add_Page_9.png" type="Texture" id=4]
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=6]
+[ext_resource path="res://font/FontBig.tres" type="DynamicFont" id=7]
+[ext_resource path="res://font/FontMedium.tres" type="DynamicFont" id=9]
+[ext_resource path="res://font/FontSmall.tres" type="DynamicFont" id=10]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+signal back_to_menu
+
+onready var img = $VBox/HBox/Bild
+onready var next_button = $VBox/HBoxNavi/Next
+onready var prev_button = $VBox/HBoxNavi/Prev
+onready var text_feld = $VBox/HBox/RichTextLabel
+
+var seite = 0
+
+var help_texts = {0:\"Hallo \"+str(G.my_name)+\"!\\nToll dass du beim Tier Lexikon mitmachst!\\n\\nBevor es losgeht noch ein paar Infos:\\n\\n Da das Tier Lexikon für jeden frei zugänglich ist müssen alle Lizenzbestimmungen eigehalten werden. Deshalb musst du zu den Texten und Fotos einige zusätzliche Angaben machen. Am einfachsten ist es sich die Texte aus Wikipedia zu kopieren, da dort alles unter der freien Lizenz CC-SA 3.0 steht.\\nFür Fotos empfehle ich Wikimedia Commons. Wenn du ein eigenes Foto verwenden möchtest, kannst du dir z.B. dort einen Account erstellen, dein Foto hochladen und dann verwenden.\",
+				1:\"Als erstes kannst du einen neuen Tier Namen wählen.\\n\\n[u]Hinweis[/u]\\nImmer wenn du so einen Einf.-Button siehst und ihn drückst, wird der Text aus der Kopierablage eingefügt.\",
+				2:\"Hier kannst du mehrere Textboxen erstellen und auswählen. Verwende für jede TextQuelle eine Textbox. Leere Textboxen werden automatisch gelöscht.\\n\\n[u]Hinweis[/u]\\nDu kannst auch eine Textbox dazu verwenden, dem Admin eine Nachricht zu schreiben.\",
+				3:\"In der Textbox wird der Text z.B. aus Wikipedia rein kopiert. Du kannst ihn auch durch den Hinzufügen-Button einfügen. Dadurch wird auch gleich das aktuelle Datum eingefügt.\\nWichtig ist nämlich, dass das Datum am Ende des Textes als der Text hinzugefügt wurde steht. (Lizenzbedingung)\\nZum Schluss muss noch die Lizenz unter der, der Text steht ausgewählt werden. Drücke dafür auf den Lizenz-Button. Du kannst nur Textlizenzen die in der Liste vorhanden sind hinzufügen!\\n\\nMit dem Undo-Button kannst du die Textfeld Aktionen rückgänging machen und mit dem Redo-Button wiederherstellen.\\nDer Keyboard-Button aktiviert bzw. deaktiviert die Bildschirmtastatur. \",
+				4:\"Das ist die Navigationsleiste. Wenn du auf Min drückst, minimiert sich die Anwendung und du kannst nach Informationen zu deinem Tier suchen.\\n\\nDrückst du auf Weiter, wird geprüft ob der Tier-Name bereits vergeben ist. Falls er frei ist gelangst du auf die nächste Seite\",
+				5:\"Als erstes kann der Link direkt zum Foto eingefügt werden. Die Seite wo man nur das Foto zu sehen ist.\\nz.B. [url]https://commons.wikimedia.org/wiki/File:Parque_nacional_da_Serra_da_Capivara_Manugirard_(01).jpg[/url]\\n\\nSobald du den Foto-Link (URL direkt zum Foto) einfügst, ladet die App das Foto in das Vorschau-Fenster.\\n\\n[u]Hinweis[/u]\\nEs können nur Fotos im Format JPG bzw. JPEG benutzt werden! Falls dir mehrere Bildgrößen zur Verfügung stehen, ist es am Besten, wenn beide Achsen mindestens 1080 Pixel lang sind. Viel größere Fotos führen nur zu langen Ladezeiten!\",
+				6:\"Der zweite Link verweist auf die Webseite wo man das Foto betrachten kann. (Die Seite wo alle Infos zum Foto stehen.)\\nz.B. [url]https://commons.wikimedia.org/wiki/File:Parque_nacional_da_Serra_da_Capivara_Manugirard_(01).jpg[/url]\",
+				7:\"Jetzt musst du den Titel des Fotos angeben. Du kannst dafür gerne die Dateiendung wie z.B: .jpg weglassen.\\nWeiters den Namen des Urheber einfügen und dann die Lizenz auswählen.\",
+				8:\"Direkt über der Fotovorschau findest du die Buttons um das Foto zu zoomen und zu spiegeln.\\nAm Handy kannst du das Foto einfach durch wischen verschieben. Am Desktop musst du dafür die Pfeltasten und Shift benützen.\",
+				9:\"Wenn du alles richtig gemacht hast kommst du auf die nächste Seite, auf der du wenn du willst noch ein zweites Foto hinzfügen kannst.\",
+				10:\"Jetzt können noch Eigenschaften gewählt werden. Diese Eigenschaften werden am Ende des Beschreibungs-Textes als Steckbrief angezeigt.\\nAußerdem werden diese Informationen für die Filter-Suche und das Rate-Spiel verwendet.\\nBitte fülle aber nur die Eigenschaften aus wo du dir sicher bist.\\n\\n Es gibt 3 verschidene Eigenschafts-Typen. Eine für exakte Eigenschaften wie z.B. 'Systematik Klasse'.\\nMit dem zweiten Typ können mehrere Eigenschaften ausgewählt werden wie z.B. 'Lieblingsnahrung'.\\nDer dritte Typ ist die Zahl-Eigenschaft, die Zahlen mit Kommawert speichern können wie z.B. 'Ø Größe in CM.'\",
+				11:\"Drücke auf eine Eigenschaft um die Auswahl anzuzeigen. Bei den exakten Eigenschafts-Typen gibt es den Eintrag 'Eigenschafts-Typ erstellen'.\",
+				12:\"Wenn du 'Eigenschafts-Typ erstellen' auswählst, öffnet sich ein weiteres Feld in dem du die neue Eigenschaft benennst.\",
+				13:\"Bei den Multi-Eigenschaften kannst du einfach mehrere Einträge auswählen. Falls du den benötigten Eintrag nicht findest, füge eine Notiz in eine eigene Textbox hinzu. Die Admin's können dann den Eintrag erstellen.\",
+				14:\"Am Schluss der Liste kommen dann noch die Zahl-Eigenschaften. Pass dabei auf, dass du die richtige Einheit verwendest.\\nØ beteutet 'durchschnittlich'.\\n\\n Somit hast du dann alles erledigt und kannst auf den FERTIG-Button drücken. ACHTUNG! Sobald du auf FERTIG gedrückt hast werden alle Einträge geprüft. Sobald der Eintrag erstellt ist kannst du nichts mehr daran ändern!\\nDann wird ein Admin sich den neuen Eintrag ansehen und freischalten.\\n\\nDanke für's mitmachen!\"
+				}
+				
+func _ready():
+	recreate_page()
+
+func _on_ButtonBack_pressed():
+	emit_signal(\"back_to_menu\")
+	queue_free()
+
+func _on_Next_pressed():
+	if seite < help_texts.size()-1:
+		seite += 1
+		prev_button.set_disabled(false)
+		recreate_page()
+	else:
+		_on_ButtonBack_pressed()
+
+func _on_Prev_pressed():
+	if seite > 0:
+		seite -= 1
+		recreate_page()
+	else:
+		prev_button.set_disabled(true)
+	
+func recreate_page():
+	img.set_texture(load(\"res://img/help/Help_Add_Page_\"+str(seite)+\".png\"))
+	text_feld.set_bbcode(\"[center]\\n\"+str(help_texts[seite])+\"[/center]\")
+
+func _on_RichTextLabel_meta_clicked(meta):
+	OS.set_clipboard(meta)
+	if meta.begins_with(\"https://\"):
+# warning-ignore:return_value_discarded
+		OS.shell_open(meta)
+	get_node(\"/root/Base\")._show_info(\"Weblink kopiert\")
+"
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="StyleBoxEmpty" id=18]
+
+[sub_resource type="StyleBoxEmpty" id=19]
+
+[sub_resource type="StyleBoxEmpty" id=20]
+
+[node name="Hilfe" type="Node2D"]
+self_modulate = Color( 1, 1, 1, 0 )
+script = SubResource( 1 )
+
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_right = 1080.0
+margin_bottom = 1849.0
+rect_min_size = Vector2( 0, 1920 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeadBox" type="HBoxContainer" parent="VBox"]
+margin_right = 1080.0
+margin_bottom = 127.0
+
+[node name="Label" type="Label" parent="VBox/HeadBox"]
+margin_right = 1012.0
+margin_bottom = 127.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 7 )
+text = "Creator Anleitung"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonBack" type="Button" parent="VBox/HeadBox"]
+margin_left = 1016.0
+margin_right = 1080.0
+margin_bottom = 127.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 10 )
+custom_styles/hover = SubResource( 16 )
+custom_styles/pressed = SubResource( 17 )
+custom_styles/focus = SubResource( 18 )
+custom_styles/disabled = SubResource( 19 )
+custom_styles/normal = SubResource( 20 )
+shortcut_in_tooltip = false
+icon = ExtResource( 2 )
+
+[node name="HBox" type="VBoxContainer" parent="VBox"]
+margin_top = 131.0
+margin_right = 1080.0
+margin_bottom = 1822.0
+rect_min_size = Vector2( 1080, 1620 )
+size_flags_vertical = 3
+
+[node name="Bild" type="TextureRect" parent="VBox/HBox"]
+margin_right = 1080.0
+margin_bottom = 1050.0
+size_flags_horizontal = 3
+texture = ExtResource( 4 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBox/HBox"]
+margin_top = 1054.0
+margin_right = 1080.0
+margin_bottom = 1691.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 1 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+bbcode_enabled = true
+
+[node name="HBoxNavi" type="HBoxContainer" parent="VBox"]
+margin_top = 1826.0
+margin_right = 1080.0
+margin_bottom = 1920.0
+
+[node name="Prev" type="Button" parent="VBox/HBoxNavi"]
+margin_left = 119.0
+margin_right = 419.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 9 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+disabled = true
+shortcut_in_tooltip = false
+text = "Zurück"
+
+[node name="Next" type="Button" parent="VBox/HBoxNavi"]
+margin_left = 661.0
+margin_right = 961.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 6
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 9 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+shortcut_in_tooltip = false
+text = "Weiter"
+
+[connection signal="pressed" from="VBox/HeadBox/ButtonBack" to="." method="_on_ButtonBack_pressed"]
+[connection signal="meta_clicked" from="VBox/HBox/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
+[connection signal="pressed" from="VBox/HBoxNavi/Prev" to="." method="_on_Prev_pressed"]
+[connection signal="pressed" from="VBox/HBoxNavi/Next" to="." method="_on_Next_pressed"]

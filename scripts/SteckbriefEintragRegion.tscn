@@ -1,0 +1,433 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=1]
+[ext_resource path="res://font/FontMedSmall.tres" type="DynamicFont" id=2]
+[ext_resource path="res://img/world_base.png" type="Texture" id=3]
+[ext_resource path="res://img/world_Karibik.png" type="Texture" id=4]
+[ext_resource path="res://img/world_Amerika_Zentral.png" type="Texture" id=5]
+[ext_resource path="res://img/world_Amerika_Süd.png" type="Texture" id=6]
+[ext_resource path="res://img/world_Indischer_Ozean.png" type="Texture" id=7]
+[ext_resource path="res://img/world_Afrika_Zentral.png" type="Texture" id=8]
+[ext_resource path="res://img/world_Afrika_West.png" type="Texture" id=9]
+[ext_resource path="res://img/world_Afrika_Ost.png" type="Texture" id=10]
+[ext_resource path="res://img/world_Asien_Süd.png" type="Texture" id=11]
+[ext_resource path="res://img/world_Australien.png" type="Texture" id=12]
+[ext_resource path="res://img/world_Pazifik_Nord.png" type="Texture" id=13]
+[ext_resource path="res://img/world_Antarktischer_Ozean.png" type="Texture" id=14]
+[ext_resource path="res://img/world_Atlantik_Süd.png" type="Texture" id=15]
+[ext_resource path="res://img/world_Afrika_Nord.png" type="Texture" id=16]
+[ext_resource path="res://img/world_Polynesien.png" type="Texture" id=17]
+[ext_resource path="res://img/world_Mikronesien.png" type="Texture" id=18]
+[ext_resource path="res://img/world_Afrika_Süd.png" type="Texture" id=19]
+[ext_resource path="res://img/world_Europa_West.png" type="Texture" id=20]
+[ext_resource path="res://img/world_Melanesien.png" type="Texture" id=21]
+[ext_resource path="res://img/world_Asien_Zentral.png" type="Texture" id=22]
+[ext_resource path="res://img/world_Pazifik_Süd.png" type="Texture" id=23]
+[ext_resource path="res://img/world_Arktischer_Ozean.png" type="Texture" id=24]
+[ext_resource path="res://img/world_Atlantik_Nord.png" type="Texture" id=25]
+[ext_resource path="res://img/world_Europa_Nord.png" type="Texture" id=26]
+[ext_resource path="res://img/world_Antarktis.png" type="Texture" id=27]
+[ext_resource path="res://img/world_Europa_Süd.png" type="Texture" id=28]
+[ext_resource path="res://img/world_Europa_Ost.png" type="Texture" id=29]
+[ext_resource path="res://img/world_Asien_Südost.png" type="Texture" id=30]
+[ext_resource path="res://img/world_Asien_West.png" type="Texture" id=31]
+[ext_resource path="res://img/world_Neuseeland.png" type="Texture" id=32]
+[ext_resource path="res://img/world_Amerika_Nord.png" type="Texture" id=33]
+[ext_resource path="res://img/world_Asien_Ost.png" type="Texture" id=34]
+[ext_resource path="res://img/world_Russland.png" type="Texture" id=35]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends VBoxContainer
+
+onready var my_text =$Box/ItemText
+
+var my_data
+var region_names = [\"Afrika Nord\",\"Afrika Ost\",\"Afrika Süd\",\"Afrika West\",\"Afrika Zentral\",\"Amerika Nord\",
+					\"Amerika Süd\",\"Amerika Zentral\",\"Karibik\",\"Asien Ost\",\"Asien Süd\",\"Asien Südost\",
+					\"Asien West\",\"Asien Zentral\",\"Europa Nord\",\"Europa Ost\",\"Europa Süd\",\"Europa West\",
+					\"Australien\",\"Neuseeland\",\"Melanesien\",\"Polynesien\",\"Mikronesien\",\"Antarktis\",
+					\"Arktischer Ozean\",\"Antarktischer Ozean\",\"Pazifik Nord\",\"Pazifik Süd\",\"Atlantik Nord\",
+					\"Atlantik Süd\",\"Indischer Ozean\",\"Russland\"]
+var region_names_b = [\"Afrika_Nord\",\"Afrika_Ost\",\"Afrika_Sued\",\"Afrika_West\",\"Afrika_Zentral\",\"Amerika_Nord\",
+					\"Amerika_Sued\",\"Amerika_Zentral\",\"Karibik\",\"Asien_Ost\",\"Asien_Sued\",\"Asien_Suedost\",
+					\"Asien_West\",\"Asien_Zentral\",\"Europa_Nord\",\"Europa_Ost\",\"Europa_Süd\",\"Europa_West\",
+					\"Australien\",\"Neuseeland\",\"Melanesien\",\"Polynesien\",\"Mikronesien\",\"Antarktis\",
+					\"Arktischer_Ozean\",\"Antarktischer_Ozean\",\"Pazifik_Nord\",\"Pazifik_Sued\",\"Atlantik_Nord\",
+					\"Atlantik_Sued\",\"Indischer_Ozean\",\"Russland\"]
+
+func _ready():
+	my_text.set_text(my_data[1])
+	for i in region_names.size():
+		if region_names[i-1] in my_data[1]:
+			get_node(\"Box/WorldBase/\"+str(region_names_b[i-1])).set_visible(true)
+
+func _set_data(steck_data):
+	my_data = steck_data
+"
+
+[sub_resource type="StyleBoxLine" id=2]
+color = Color( 1, 0.537255, 0.305882, 0.478431 )
+grow_begin = -32.0
+grow_end = -32.0
+thickness = 4
+
+[node name="SteckbriefEintragRegion" type="VBoxContainer"]
+margin_right = 1050.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 1050, 0 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box" type="VBoxContainer" parent="."]
+margin_right = 1050.0
+margin_bottom = 533.0
+
+[node name="ItemText" type="Label" parent="Box"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 63.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.513726, 1, 0.67451, 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 1 )
+text = "Test_Region"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldBase" type="TextureRect" parent="Box"]
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 3 )
+stretch_mode = 5
+
+[node name="Afrika_Nord" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 16 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Afrika_Ost" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 10 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Afrika_Sued" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 19 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Afrika_West" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 9 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Afrika_Zentral" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 8 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amerika_Nord" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 33 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amerika_Sued" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 6 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amerika_Zentral" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 5 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Karibik" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 4 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Asien_Ost" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 34 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Asien_Sued" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 11 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Asien_Suedost" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 30 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Asien_West" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 31 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Asien_Zentral" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 22 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Europa_Nord" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 26 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Europa_Ost" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 29 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Europa_Süd" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 28 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Europa_West" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 20 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Australien" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 12 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Neuseeland" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 32 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Melanesien" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 21 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Polynesien" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 17 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mikronesien" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 18 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Antarktis" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 27 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Arktischer_Ozean" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 24 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Antarktischer_Ozean" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 14 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pazifik_Nord" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 13 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pazifik_Sued" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 23 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Atlantik_Nord" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 25 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Atlantik_Sued" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 15 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Indischer_Ozean" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 7 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Russland" type="TextureRect" parent="Box/WorldBase"]
+visible = false
+margin_right = 1050.0
+margin_bottom = 533.0
+texture = ExtResource( 35 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 537.0
+margin_right = 1050.0
+margin_bottom = 553.0
+custom_constants/separation = 16
+custom_styles/separator = SubResource( 2 )

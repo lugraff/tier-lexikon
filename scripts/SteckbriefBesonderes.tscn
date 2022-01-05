@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=1]
+[ext_resource path="res://font/FontMedSmall.tres" type="DynamicFont" id=2]
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends VBoxContainer
+
+onready var text =$ItemText
+
+var my_text = \"\"
+
+func _ready():
+	text.set_text(my_text)
+
+func _set_data(data):
+	my_text = data
+"
+
+[sub_resource type="StyleBoxLine" id=2]
+color = Color( 1, 0.537255, 0.305882, 0.478431 )
+grow_begin = -32.0
+grow_end = -32.0
+thickness = 4
+
+[node name="SteckbriefBesonderes" type="VBoxContainer"]
+margin_right = 1050.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 1050, 0 )
+script = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 1050.0
+margin_bottom = 63.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 1 )
+text = "         Besonderes"
+autowrap = true
+
+[node name="ItemText" type="Label" parent="."]
+margin_top = 67.0
+margin_right = 1050.0
+margin_bottom = 130.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.513726, 1, 0.67451, 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 1 )
+text = "Text"
+align = 1
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 134.0
+margin_right = 1050.0
+margin_bottom = 150.0
+custom_constants/separation = 16
+custom_styles/separator = SubResource( 2 )

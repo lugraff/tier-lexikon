@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=1]
+[ext_resource path="res://tres/Popup.tres" type="StyleBox" id=2]
+[ext_resource path="res://font/FontMedSmall.tres" type="DynamicFont" id=3]
+[ext_resource path="res://img/icon_look2.png" type="Texture" id=4]
+[ext_resource path="res://img/icon_look.png" type="Texture" id=5]
+[ext_resource path="res://tres/ButtonSideR.tres" type="StyleBox" id=6]
+[ext_resource path="res://font/FontMedBig.tres" type="DynamicFont" id=7]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends VBoxContainer
+
+onready var betreff = $Header/Betreff
+onready var message_text = $MessageText
+onready var button_show = $Header/ButtonShow
+
+var my_data = {}
+
+func _set_data(data):
+	print(data)
+	my_data = data
+
+func _ready():
+	betreff.set_text(str(my_data.values()[0][\"header\"]))
+	message_text.set_text(str(my_data.values()[0][\"message\"]))
+	if G.readed_messages.has(my_data.keys()[0]):
+		message_text.set_visible(false)
+		button_show.set_pressed(false)
+
+func _on_ButtonShow_toggled(button_pressed):
+	message_text.set_visible(button_pressed)
+	if not button_pressed:
+		if not G.readed_messages.has(my_data.keys()[0]):
+			G.readed_messages.append(my_data.keys()[0])
+"
+
+[node name="Message" type="VBoxContainer"]
+margin_right = 1080.0
+margin_bottom = 90.0
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="HBoxContainer" parent="."]
+margin_right = 1080.0
+margin_bottom = 103.0
+
+[node name="ButtonShow" type="CheckButton" parent="Header"]
+margin_right = 72.0
+margin_bottom = 103.0
+custom_constants/check_vadjust = -8
+custom_constants/hseparation = 8
+custom_fonts/font = ExtResource( 3 )
+custom_icons/off = ExtResource( 4 )
+custom_icons/on_disabled = ExtResource( 5 )
+custom_icons/on = ExtResource( 5 )
+custom_icons/off_disabled = ExtResource( 4 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/hover_pressed = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+shortcut_in_tooltip = false
+pressed = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Betreff" type="Label" parent="Header"]
+margin_left = 76.0
+margin_right = 1080.0
+margin_bottom = 103.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 7 )
+custom_styles/normal = ExtResource( 2 )
+text = "Willkommen"
+align = 1
+
+[node name="MessageText" type="Label" parent="."]
+margin_top = 107.0
+margin_right = 1080.0
+margin_bottom = 185.0
+custom_styles/normal = ExtResource( 1 )
+text = "Test_Text"
+align = 1
+autowrap = true
+
+[connection signal="toggled" from="Header/ButtonShow" to="." method="_on_ButtonShow_toggled"]

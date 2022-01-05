@@ -1,0 +1,184 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://font/FontMedium.tres" type="DynamicFont" id=1]
+[ext_resource path="res://tres/ButtonMenu.tres" type="StyleBox" id=2]
+[ext_resource path="res://font/FontMedSmall.tres" type="DynamicFont" id=3]
+[ext_resource path="res://tres/ButtonBase.tres" type="StyleBox" id=4]
+[ext_resource path="res://img/icon_look2.png" type="Texture" id=5]
+[ext_resource path="res://img/icon_look.png" type="Texture" id=6]
+[ext_resource path="res://scripts/TextBox.gd" type="Script" id=7]
+[ext_resource path="res://img/icon_remove.png" type="Texture" id=8]
+
+[node name="TextBox" type="VBoxContainer"]
+margin_top = 16.0
+margin_right = 1080.0
+margin_bottom = 1413.0
+custom_constants/separation = 12
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TBeschreibung" type="TextEdit" parent="."]
+margin_right = 1080.0
+margin_bottom = 1200.0
+rect_min_size = Vector2( 0, 1200 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/completion_scroll_width = 300
+custom_fonts/font = ExtResource( 1 )
+custom_styles/read_only = ExtResource( 4 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+custom_styles/completion = ExtResource( 4 )
+highlight_current_line = true
+draw_tabs = true
+draw_spaces = true
+breakpoint_gutter = true
+override_selected_font_color = true
+wrap_enabled = true
+minimap_width = 60
+caret_blink = true
+caret_moving_by_right_click = false
+
+[node name="HBoxTextPageLink" type="HBoxContainer" parent="."]
+margin_top = 1212.0
+margin_right = 1080.0
+margin_bottom = 1291.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonTextPageEinf" type="Button" parent="HBoxTextPageLink"]
+margin_right = 109.0
+margin_bottom = 79.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Einf."
+
+[node name="TextPageLink" type="LineEdit" parent="HBoxTextPageLink"]
+margin_left = 113.0
+margin_right = 816.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 3 )
+custom_icons/clear = ExtResource( 8 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+clear_button_enabled = true
+placeholder_text = "Text Seiten Link (URL)"
+
+[node name="Textlizenz" type="OptionButton" parent="HBoxTextPageLink"]
+margin_left = 820.0
+margin_right = 1080.0
+margin_bottom = 79.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+shortcut_in_tooltip = false
+action_mode = 1
+text = "--> Lizenz"
+items = [ "--> Lizenz", null, false, 0, null ]
+selected = 0
+
+[node name="HBox" type="HBoxContainer" parent="."]
+margin_top = 1303.0
+margin_right = 1080.0
+margin_bottom = 1397.0
+size_flags_vertical = 10
+custom_constants/separation = 28
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonEinfTBeschreibung" type="Button" parent="HBox"]
+margin_left = 3.0
+margin_right = 329.0
+margin_bottom = 94.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+shortcut_in_tooltip = false
+text = "Hinzufügen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonUndo" type="Button" parent="HBox"]
+margin_left = 357.0
+margin_right = 521.0
+margin_bottom = 94.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+shortcut_in_tooltip = false
+text = "Undo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonRedo" type="Button" parent="HBox"]
+margin_left = 549.0
+margin_right = 705.0
+margin_bottom = 94.0
+custom_colors/font_color_pressed = Color( 1, 0.537255, 0.305882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+shortcut_in_tooltip = false
+text = "Redo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonKeyboard" type="CheckButton" parent="HBox"]
+margin_left = 733.0
+margin_right = 1077.0
+margin_bottom = 94.0
+custom_constants/check_vadjust = -8
+custom_constants/hseparation = 8
+custom_fonts/font = ExtResource( 1 )
+custom_icons/off = ExtResource( 5 )
+custom_icons/on_disabled = ExtResource( 6 )
+custom_icons/on = ExtResource( 6 )
+custom_icons/off_disabled = ExtResource( 5 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/hover_pressed = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+shortcut_in_tooltip = false
+pressed = true
+text = "Keyboard"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="HBoxTextPageLink/ButtonTextPageEinf" to="." method="_on_ButtonTextPageEinf_pressed"]
+[connection signal="item_selected" from="HBoxTextPageLink/Textlizenz" to="." method="_on_Textlizenz_item_selected"]
+[connection signal="pressed" from="HBox/ButtonEinfTBeschreibung" to="." method="_on_ButtonEinfTBeschreibung_pressed"]
+[connection signal="pressed" from="HBox/ButtonUndo" to="." method="_on_ButtonUndo_pressed"]
+[connection signal="pressed" from="HBox/ButtonRedo" to="." method="_on_ButtonRedo_pressed"]
+[connection signal="toggled" from="HBox/ButtonKeyboard" to="." method="_on_ButtonKeyboard_toggled"]

@@ -1,0 +1,177 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://font/FontMedium.tres" type="DynamicFont" id=1]
+
+[sub_resource type="GDScript" id=19]
+script/source = "extends MarginContainer
+
+onready var text = $InfoText
+var info_text = \"\"
+
+func set_new_text(new_text):
+	info_text = str(new_text)
+
+func _ready():
+	text.set_text(info_text)
+
+func _on_Anim_animation_finished(_anim_name):
+	queue_free()
+"
+
+[sub_resource type="Gradient" id=12]
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 0, 0, 0, 0.862745, 0, 0, 0, 0.980392, 0, 0, 0, 0.862745 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 12 )
+width = 64
+
+[sub_resource type="Animation" id=17]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 256 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rect_size:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1080, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:rect_size:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 347, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath(".:rect_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath(".:rect_position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 512, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "slide"
+length = 3.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rect_position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 256, -0.25, 0, 1.7, -481.101, 1000, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 3 )
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="Infobox" type="MarginContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 512.0
+margin_right = 1080.0
+margin_bottom = 859.0
+rect_min_size = Vector2( 1080, 300 )
+size_flags_horizontal = 0
+custom_constants/margin_right = 96
+custom_constants/margin_top = 96
+custom_constants/margin_left = 96
+custom_constants/margin_bottom = 96
+script = SubResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="TextureRect" parent="."]
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 984.0
+margin_bottom = 251.0
+texture = SubResource( 13 )
+expand = true
+stretch_mode = 1
+
+[node name="Frame" type="ReferenceRect" parent="."]
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 984.0
+margin_bottom = 251.0
+border_color = Color( 1, 1, 1, 1 )
+border_width = 2.0
+editor_only = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InfoText" type="Label" parent="."]
+margin_left = 96.0
+margin_top = 135.0
+margin_right = 984.0
+margin_bottom = 211.0
+custom_fonts/font = ExtResource( 1 )
+text = "Info"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+autoplay = "slide"
+anims/RESET = SubResource( 17 )
+anims/slide = SubResource( 18 )
+
+[connection signal="animation_finished" from="Anim" to="." method="_on_Anim_animation_finished"]
