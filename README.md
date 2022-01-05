@@ -1,3 +1,10 @@
+Das Projekt wurde mit Godot 3.4 erstellt.
+Um es nutzen zu können brauchst du einen Silent Wolf Account. https://silentwolf.com/
+In den Globals.gd im script Ordner muss ein Silent Wolf API-Key und Name und Version-NR eingetragen werden.
+Um das Projekt auf Android exportieren zu können musst du die Android Exportvorlage in Godot installieren.
+
+Presentation:
+
 ![Banner(1024x500px)](https://user-images.githubusercontent.com/93408437/148278361-90e12584-5932-4d4e-b6af-7673836ab69b.png)
 
 Du magst Tiere und bist wissbegierig? Dann bist du hier genau richtig!
