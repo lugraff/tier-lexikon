@@ -1,3 +1,6 @@
+ACHTUNG! Das Projekt wurde durch Luxikon ersetzt!
+Du findest es hier: https://lugraff.itch.io/luxikon
+
 Das Projekt wurde mit Godot 3.4 erstellt.
 Um es nutzen zu können brauchst du einen Silent Wolf Account. https://silentwolf.com/
 In den Globals.gd im script Ordner muss ein Silent Wolf API-Key und Name und Version-NR eingetragen werden.
